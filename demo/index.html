@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Paper-autocomplete Daisy Demo</title>
+    <script>
+        import '../paper-autocomplete-custom.js';
+
+        let players = [
+            {
+                numberShirt: 35,
+                name: 'KD',
+                text: 'vaffamoc'
+            },
+            {
+                numberShirt: 30,
+                name: 'Curry',
+                text: 'giusto'
+            },
+            {
+                numberShirt: 11,
+                name: 'Culo',
+                text: 'fatti due domande'
+            }
+        ];
+
+        let playerDefault = {
+            numberShirt: 35,
+            name: 'KD',
+            text: 'vaffamoc'
+        };
+    </script>
+</head>
+
+<body>
+    <style>
+        :host {
+            display: block;
+            box-sizing: border-box;
+            position: relative;
+
+            --paper-input-container-focus-color: var(--primary-color, red);
+
+            --paper-icon-button: {
+                height: 24px;
+                width: 24px;
+                padding: 2px;
+            }
+
+            --paper-input-container-ms-clear: {
+                display: none;
+            }
+        }
+
+        .input-wrapper {
+            @apply --layout-horizontal;
+        }
+
+        .input-wrapper paper-input {
+            @apply --layout-flex;
+        }
+
+        #clear {
+            display: none;
+            line-height: 8px;
+        }
+
+        .sr-only {
+            position: absolute;
+            clip: rect(1px, 1px, 1px, 1px);
+        }
+
+        paper-autocomplete-suggestions {
+            --suggestions-wrapper: {
+                @apply --paper-autocomplete-suggestions-wrapper;
+            };
+
+            --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
+        }
+    </style>
+    <div>
+        <h2>Paper Autocomplete BASE, whit suffix</h2>
+        <p>Info of this example</p>
+        <paper-autocomplete id="suffix" class="autocomplete-states" source="[[players]]" default-value="[[playerDefault]]" label="Search Something" text-property="name" show-results-on-focus="true">
+            <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+        </paper-autocomplete>
+    </div>
+</body>
+
+</html>
