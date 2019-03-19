@@ -3,7 +3,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
 import '@polymer/paper-input/paper-input.js';
 import '@polymer/paper-icon-button/paper-icon-button.js';
 import '@polymer/iron-icon/iron-icon.js';
-import '../paper-autocomplete-custom/paper-autocomplete-suggestions.js';
+import './paper-autocomplete-suggestions.js';
 
 class PaperAutocomplete extends PolymerElement {
     static get template() {

@@ -1,3 +1,3 @@
-#paper-autocomplete
+# paper-autocomplete #
 
 - TODO
