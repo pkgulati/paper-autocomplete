@@ -6,7 +6,7 @@
     "main": "index.html",
     "author": "Dessi Emanuele",
     "devDependencies": {
-        "polymer-cli": "1.9.7",
+        "polymer-cli": "^1.9.7",
         "wct-browser-legacy": "^1.0.0"
     },
     "scripts": {
