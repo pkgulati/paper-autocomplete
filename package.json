@@ -5,6 +5,13 @@
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "main": "index.html",
     "author": "Dessi Emanuele",
+    "devDependencies": {
+        "polymer-cli": "1.9.7",
+        "wct-browser-legacy": "^1.0.0"
+    },
+    "scripts": {
+        "test": "polymer test"
+    },
     "dependencies": {
         "@polymer/iron-icon": "^3.0.0-pre.12",
         "@polymer/iron-icons": "^3.0.0-pre.12",
