@@ -21,12 +21,23 @@
         </template>
     </test-fixture>
 
+    <test-fixture id="setLabel">
+        <template>
+            <paper-autocomplete label="Search Something" text-property="name"></paper-autocomplete>
+        </template>
+    </test-fixture>
+
     <script>
         suite('paper-autocomplete-test-suite', function () {
 
             test('init', function () {
                 var element = fixture('Init');
                 assert.equal(element.invalid, false);
+            });
+            
+            test('setLabel', function () {
+                var element = fixture('setLabel');
+                assert.equal(element.label, 'Search Something');
             });
 
         });

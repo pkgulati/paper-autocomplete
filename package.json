@@ -10,6 +10,7 @@
         "wct-browser-legacy": "^1.0.0"
     },
     "scripts": {
+        "test-safari": "polymer test -l safari",
         "test": "polymer test"
     },
     "dependencies": {

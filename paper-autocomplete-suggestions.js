@@ -318,7 +318,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     disconnectedCallback() {
         super.disconnectedCallback();
 
-        his.cancelDebouncer('_onSuggestionChanged');
+        // this.cancelDebouncer('_onSuggestionChanged'); //check this
 
         this._input.removeEventListener('keyup', this._bindedFunctions._onKeypress);
         this._input.removeEventListener('focus', this._bindedFunctions._onFocus);
