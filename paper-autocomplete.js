@@ -54,36 +54,37 @@ class PaperAutocomplete extends PolymerElement {
                 }
             </style>
             <div class="autocomplete-wrapper">
+                <!-- Find all information for WAI-ARIA (role attribute ecc..) in this site https://www.w3.org/TR/wai-aria-1.1/#combobox -->
                 <div class="input-wrapper" role="combobox" aria-haspopup="true" aria-owns="suggestionsWrapper" aria-expanded$="[[_isSuggestionsOpened]]">
-                <!-- For accessibility, it is needed to have a label or aria-label. Label is preferred -->
-                <label for="autocompleteInput" class="sr-only">[[label]]</label>
+                    <!-- For accessibility, it is needed to have a label or aria-label. Label is preferred -->
+                    <label for="autocompleteInput" class="sr-only">[[label]]</label>
 
-                <paper-input id="autocompleteInput"
-                            label="[[label]]"
-                            autocapitalize="[[autocapitalize]]"
-                            no-label-float="[[noLabelFloat]]"
-                            disabled="{{disabled}}"
-                            readonly="[[readonly]]"
-                            focused="{{focused}}"
-                            auto-validate$="[[autoValidate]]"
-                            error-message$="[[errorMessage]]"
-                            required$="[[required]]"
-                            value="{{text}}"
-                            allowed-pattern="[[allowedPattern]]"
-                            pattern="[[pattern]]"
-                            no-label-float="[[noLabelFloat]]"
-                            always-float-label="[[alwaysFloatLabel]]"
-                            char-counter$="[[charCounter]]"
-                            maxlength$="[[maxlength]]"
-                            placeholder="[[placeholder]]"
-                            invalid="{{invalid}}"
+                    <paper-input id="autocompleteInput"
+                                label="[[label]]"
+                                autocapitalize="[[autocapitalize]]"
+                                no-label-float="[[noLabelFloat]]"
+                                disabled="{{disabled}}"
+                                readonly="[[readonly]]"
+                                focused="{{focused}}"
+                                auto-validate$="[[autoValidate]]"
+                                error-message$="[[errorMessage]]"
+                                required$="[[required]]"
+                                value="{{text}}"
+                                allowed-pattern="[[allowedPattern]]"
+                                pattern="[[pattern]]"
+                                no-label-float="[[noLabelFloat]]"
+                                always-float-label="[[alwaysFloatLabel]]"
+                                char-counter$="[[charCounter]]"
+                                maxlength$="[[maxlength]]"
+                                placeholder="[[placeholder]]"
+                                invalid="{{invalid}}"
 
-                            role="textbox"
-                            aria-autocomplete="list"
-                            aria-multiline="false"
-                            aria-activedescendant$="[[_highlightedSuggestion.elementId]]"
-                            aria-disabled$="[[disabled]]"
-                            aria-controls="autocompleteStatus suggestionsWrapper">
+                                role="textbox"
+                                aria-autocomplete="list"
+                                aria-multiline="false"
+                                aria-activedescendant$="[[_highlightedSuggestion.elementId]]"
+                                aria-disabled$="[[disabled]]"
+                                aria-controls="autocompleteStatus suggestionsWrapper">
 
                         <slot name="prefix" slot="prefix"></slot>
                         <paper-icon-button slot="suffix" suffix id="clear" icon="clear" on-click="_clear"></paper-icon-button>

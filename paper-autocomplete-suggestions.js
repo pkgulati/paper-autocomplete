@@ -1,6 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { flush } from '@polymer/polymer/lib/utils/flush.js';
-import { templatize, modelForElement } from '@polymer/polymer/lib/utils/templatize.js';
+//LEGACY
+import { templatize } from '@polymer/polymer/lib/utils/templatize.js';
+import {  } from '@polymer/polymer/lib/legacy/legacy-element-mixin.js';
 
 class PaperAutocompleteSuggestions extends PolymerElement {
 
@@ -295,6 +297,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         // is defined. If we do not do this, it won't be possible to access paperSuggestions from the custom template
         // TODO: find a way to achieve this without modifying Polymer internal properties
         this._suggestionTemplate.__dataHost = this;
+        //LEGACY
         templatize(this.$.defaultTemplate, this);
     }
 
@@ -318,6 +321,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     disconnectedCallback() {
         super.disconnectedCallback();
 
+        //LEGACY
         // this.cancelDebouncer('_onSuggestionChanged'); //check this
 
         this._input.removeEventListener('keyup', this._bindedFunctions._onKeypress);
@@ -446,6 +450,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             if (template.__templatizeOwner) { //PORCATA?? [lo scopriremo solo vivendo]
                 template.__templatizeOwner = null;
             }
+            //LEGACY
             let TemplateClass = templatize(template);
             let clone = new TemplateClass({ item: result, index: index });
 
