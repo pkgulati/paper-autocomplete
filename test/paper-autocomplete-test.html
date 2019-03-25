@@ -26,8 +26,32 @@
             <paper-autocomplete label="Search Something" text-property="name"></paper-autocomplete>
         </template>
     </test-fixture>
+    
+    <test-fixture id="setValueInput">
+        <template>
+            <paper-autocomplete label="Search Something" text-property="name" source="[[players]]"></paper-autocomplete>
+        </template>
+    </test-fixture>
 
     <script>
+        let players = [
+            {
+                numberShirt: 35,
+                name: 'KD',
+                text: 'vaffamoc'
+            },
+            {
+                numberShirt: 30,
+                name: 'Curry',
+                text: 'giusto'
+            },
+            {
+                numberShirt: 11,
+                name: 'Culo',
+                text: 'fatti due domande'
+            }
+        ];
+
         suite('paper-autocomplete-test-suite', function () {
 
             test('init', function () {
@@ -40,6 +64,12 @@
                 assert.equal(element.label, 'Search Something');
             });
 
+            test('setValueInput', function () {
+                var element = fixture('setValueInput');
+                element.value = 'cu';
+                let suggestion = element.shadowRoot;
+                console.log(suggestion);
+            });
         });
     </script>
 </body>

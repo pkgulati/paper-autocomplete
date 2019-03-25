@@ -11,7 +11,8 @@
     },
     "scripts": {
         "test-safari": "polymer test -l safari",
-        "test": "polymer test"
+        "test": "polymer test",
+        "serve": "polymer serve -o"
     },
     "dependencies": {
         "@polymer/iron-icon": "^3.0.0-pre.12",
