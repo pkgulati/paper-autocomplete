@@ -1,6 +1,6 @@
 {
     "name": "@p3e/paper-autocomplete",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "main": "index.html",
