@@ -281,7 +281,7 @@ class PaperAutocomplete extends PolymerElement {
             },
 
             /**
-             * allowedPattern` allowedPattern to validate input field
+             * `allowedPattern` to validate input field
              */
             allowedPattern: {
                 type: String
@@ -332,14 +332,6 @@ class PaperAutocomplete extends PolymerElement {
             showResultsOnFocus: {
                 type: Boolean,
                 value: false
-            },
-
-            /**
-             * Object containing the information of the currently selected option
-             */
-            selectedOption: {
-                type: Object,
-                notify: true
             },
 
             defaultValue: {
@@ -404,7 +396,7 @@ class PaperAutocomplete extends PolymerElement {
             text: this.text,
             value: this.value
         };
-
+        console.warn('option', option);
         this.value = null;
         this.text = '';
 
@@ -499,8 +491,7 @@ class PaperAutocomplete extends PolymerElement {
      * @param {Object} option
      */
     _setOption(option) {
-        //value is option and selectOption... fuck.. to try
-        this.text = option[this.textProperty] || option.text;
+        this.text = option[this.textProperty];
         this.value = option;
         this._showClearButton();
     }

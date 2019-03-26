@@ -7,7 +7,8 @@
     "author": "Dessi Emanuele",
     "devDependencies": {
         "polymer-cli": "^1.9.7",
-        "wct-browser-legacy": "^1.0.0"
+        "wct-browser-legacy": "^1.0.0",
+        "web-component-tester": "^6.9.2"
     },
     "scripts": {
         "test-safari": "polymer test -l safari",

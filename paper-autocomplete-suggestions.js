@@ -2,13 +2,12 @@ import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { flush } from '@polymer/polymer/lib/utils/flush.js';
 //LEGACY
 import { templatize } from '@polymer/polymer/lib/utils/templatize.js';
-import {  } from '@polymer/polymer/lib/legacy/legacy-element-mixin.js';
 
 class PaperAutocompleteSuggestions extends PolymerElement {
 
     static get template() {
         return html`
-            <style is="custom-style" include="paper-material-styles">
+            <style is="custom-style">
                 paper-item,
                 :host ::slotted(paper-item) {
                     min-height: var(--paper-item-min-height, 36px);
@@ -56,10 +55,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 }
             </style>
             <div>
-                <!-- unselectable is needed to fix an issue related to the focus being taken away when clicking in the
-                results scrollbar -->
-                <!-- <paper-material elevation="1" id="suggestionsWrapper" unselectable="on"></paper-material> -->
-                <!-- <div class="paper-font-headline">Headline</div> -->
+                <!-- unselectable is needed to fix an issue related to the focus being taken away when clicking in the results scrollbar -->
                 <div class="paper-material" elevation="1" id="suggestionsWrapper" unselectable="on"></div>
                 <!-- Default suggestion template -->
                 <template id="defaultTemplate">
@@ -115,15 +111,6 @@ class PaperAutocompleteSuggestions extends PolymerElement {
              */
             source: {
                 type: Array
-            },
-
-            /**
-             *  Object containing information about the current selected option. The structure of the object depends on the
-             *  structure of each element in the data source.
-             */
-            selectedOption: {
-                type: Object,
-                notify: true
             },
 
             /**
@@ -284,8 +271,9 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
         this._value = this.value;
 
+        //IMPORTANT?? try without
         // This is important to be able to access component methods inside the templates used with Templatizer
-        this.dataHost = this;
+        // this.dataHost = this;
 
         // Need to capture mousedown to prevent the focus to switch from input field when user clicks in the scrollbar
         // and the autosuggest is a child of an element with tabindex.
@@ -293,10 +281,12 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             event.preventDefault();
         });
 
+        //IMPORTANT?? try without
         // We need to enforce that dataHost is the suggestions and not the custom polymer element where the template
         // is defined. If we do not do this, it won't be possible to access paperSuggestions from the custom template
         // TODO: find a way to achieve this without modifying Polymer internal properties
-        this._suggestionTemplate.__dataHost = this;
+        // this._suggestionTemplate.__dataHost = this;
+        
         //LEGACY
         templatize(this.$.defaultTemplate, this);
     }
@@ -304,6 +294,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     connectedCallback() {
         super.connectedCallback();
         this._input = this.parentNode.querySelector(`#${this.getAttribute('for')}`);
+
+        console.warn('input', this._input);
+        console.warn('cazzo è?', this.getAttribute('for'));
+        
 
         if (this._input === null) {
             throw new Error('Cannot find input field with id: ' + this.for);
@@ -321,7 +315,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     disconnectedCallback() {
         super.disconnectedCallback();
 
-        //LEGACY
+        // LEGACY
         // this.cancelDebouncer('_onSuggestionChanged'); //check this
 
         this._input.removeEventListener('keyup', this._bindedFunctions._onKeypress);
@@ -441,25 +435,22 @@ class PaperAutocompleteSuggestions extends PolymerElement {
      */
     _renderSuggestions(suggestions) { //ONLY POLYMER 3.X
         var suggestionsContainer = this.$.suggestionsWrapper;
-
         this._clearSuggestions();
-        //change foreach function in arrowFunction
         suggestions.forEach((result, index) => {
+            let template = this.$.defaultTemplate;
             // clone the template and bind with the model, in Polymer 3 it's possible to be templetaize only one once
-            let template = this.$.defaultTemplate; //use element not className
+            // so, this is necessary to clone the template.
             if (template.__templatizeOwner) { //PORCATA?? [lo scopriremo solo vivendo]
                 template.__templatizeOwner = null;
             }
             //LEGACY
             let TemplateClass = templatize(template);
             let clone = new TemplateClass({ item: result, index: index });
-
             suggestionsContainer.appendChild(clone.root);
         });
     }
 
     _clearSuggestions() {
-        // var suggestionsContainer = Polymer.dom(this.$.suggestionsWrapper),
         var suggestionsContainer = this.$.suggestionsWrapper,
             last;
         while (last = suggestionsContainer.lastChild) suggestionsContainer.removeChild(last);
@@ -469,20 +460,16 @@ class PaperAutocompleteSuggestions extends PolymerElement {
        * Listener to changes to _suggestions state
        */
     _onSuggestionsChanged() {
+        
         this._input.debounce('_onSuggestionChanged', function () {
             this._renderSuggestions(this._suggestions);
-
             if (this._suggestions.length > 0) {
                 this._showSuggestionsWrapper();
             } else {
                 this._hideSuggestionsWrapper();
             }
-
-            // this.notifySplices('_suggestions');
+            
             flush();
-            // this.render();
-
-
             this._resetScroll();
 
             if (!this._hasItemHighBeenCalculated) {
@@ -508,7 +495,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._input.value = selectedOption[this.textProperty];
 
         this._value = selectedOption;
-        this._text = this.text;
+        this._text = selectedOption[this.textProperty];
         this._emptyItems();
         this._fireEvent(selectedOption, 'selected');
 
@@ -705,8 +692,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
      */
     _onBlur() {
         var option = {
-            text: this.text,
-            value: this.value
+            text: this._text,
+            value: this._value
         };
 
         this._fireEvent(option, 'blur');
@@ -719,8 +706,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
      */
     _onFocus(event) {
         var option = {
-            text: this.text,
-            value: this.value
+            text: this._text,
+            value: this._value
         };
 
         if (this.showResultsOnFocus) {
