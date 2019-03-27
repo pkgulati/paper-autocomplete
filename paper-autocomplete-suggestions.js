@@ -7,7 +7,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     static get template() {
         return html`
-            <style is="custom-style">
+            <style is="custom-style" include="paper-material-styles">
                 paper-item,
                 :host ::slotted(paper-item) {
                     min-height: var(--paper-item-min-height, 36px);
