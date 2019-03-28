@@ -4,33 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Paper-autocomplete Daisy Demo</title>
-    <script>
-        import '../paper-autocomplete-custom.js';
-
-        let players = [
-            {
-                numberShirt: 35,
-                name: 'KD',
-                text: 'vaffamoc'
-            },
-            {
-                numberShirt: 30,
-                name: 'Curry',
-                text: 'giusto'
-            },
-            {
-                numberShirt: 11,
-                name: 'Culo',
-                text: 'fatti due domande'
-            }
-        ];
-
-        let playerDefault = {
-            numberShirt: 35,
-            name: 'KD',
-            text: 'vaffamoc'
-        };
-    </script>
+    <script type="module" src="../paper-autocomplete.js"></script>
 </head>
 
 <body>
@@ -78,13 +52,40 @@
 
             --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
         }
+        #first{
+            margin: 0 auto;
+            max-width: 500px;
+        }
     </style>
+    <script>
+        setTimeout(function(){
+            document.querySelector('#suffix').source = [
+                {
+                    numberShirt: 35,
+                    name: 'KD',
+                    text: 'vaffamoc'
+                },
+                {
+                    numberShirt: 30,
+                    name: 'Curry',
+                    text: 'giusto'
+                },
+                {
+                    numberShirt: 11,
+                    name: 'Culo',
+                    text: 'fatti due domande'
+                }
+            ];
+        }, 1000);
+    </script>
     <div>
         <h2>Paper Autocomplete BASE, whit suffix</h2>
         <p>Info of this example</p>
-        <paper-autocomplete id="suffix" class="autocomplete-states" source="[[players]]" default-value="[[playerDefault]]" label="Search Something" text-property="name" show-results-on-focus="true">
-            <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
-        </paper-autocomplete>
+        <div id="first">
+            <paper-autocomplete id="suffix" source="[[players]]" label="Search Something" text-property="name">
+                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+            </paper-autocomplete>
+        </div>
     </div>
 </body>
 
