@@ -295,8 +295,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         super.connectedCallback();
         this._input = this.parentNode.querySelector(`#${this.getAttribute('for')}`);
 
-        console.warn('input', this._input);
-        console.warn('cazzo è?', this.getAttribute('for'));
+        // console.warn('input', this._input);
+        // console.warn('cazzo è?', this.getAttribute('for'));
         
 
         if (this._input === null) {
@@ -393,13 +393,16 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             this._suggestions = [];
         }
     }
-
+    /**
+     * 
+     * @param {CustomEvent} event 
+     */
     _createSuggestions(event) {
         this._currentIndex = -1;
         this._scrollIndex = 0;
 
         var value = event.target.value;
-
+        
         //Check condition logic (we can write this better)
         if (this.showResultsOnFocus) {
             value = value.toLowerCase();

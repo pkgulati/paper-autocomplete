@@ -396,7 +396,7 @@ class PaperAutocomplete extends PolymerElement {
             text: this.text,
             value: this.value
         };
-        console.warn('option', option);
+        // console.warn('option', option);
         this.value = null;
         this.text = '';
 

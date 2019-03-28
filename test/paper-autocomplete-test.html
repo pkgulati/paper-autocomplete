@@ -8,6 +8,7 @@
     <title>paper-autocomplete test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="../node_modules/@polymer/polymer/lib/elements/dom-bind.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
     <script type="module" src="../paper-autocomplete.js"></script>
@@ -15,93 +16,127 @@
 
 <body>
 
-    <test-fixture id="Init">
+    <test-fixture id="initAutocompleteDefaultValue">
         <template>
             <paper-autocomplete></paper-autocomplete>
         </template>
     </test-fixture>
 
-    <test-fixture id="setLabel">
+    <test-fixture id="autocompleteWithSuffix">
         <template>
-            <paper-autocomplete label="Search Something"></paper-autocomplete>
+            <paper-autocomplete label="Search Something">
+                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+            </paper-autocomplete>
         </template>
     </test-fixture>
     
     <test-fixture id="setArraySource">
         <template>
-            <paper-autocomplete label="Search Something" text-property="name"></paper-autocomplete>
+            <paper-autocomplete label="Search Something" text-property="name" source=[[players]]>
+                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+            </paper-autocomplete>
         </template>
     </test-fixture>
 
     <!-- TODO in second Suite test -->
-    <test-fixture id="setValueInput">
+    <!-- <test-fixture id="setValueInput">
         <template>
             <paper-autocomplete label="Search Something" text-property="name"></paper-autocomplete>
         </template>
-    </test-fixture>
+    </test-fixture> -->
 
     <script>
         suite('testingValueAttribute', function () {
 
-            test('init', function () {
-                var element = fixture('Init');
-                assert.equal(element.invalid, false);
+            // in this test, look if the all attributes are init currectly
+            test('initAutocompleteDefaultValue', function () {
+                var element = fixture('initAutocompleteDefaultValue');
+
+                //Default Value
+                assert.equal(element.autoValidate, false); //paper-input attribute
+                assert.equal(element.invalid, false); //paper-input attribute
+                assert.equal(element.noLabelFloat, false); //paper-input attribute
+                assert.equal(element.alwaysFloatLabel, false); //paper-input attribute
+                assert.equal(element.required, false); //paper-input attribute
+                assert.equal(element.focused, false); //paper-input attribute
+                assert.equal(element.readonly, false); //paper-input attribute
+                assert.equal(element.disabled, false); //paper-input attribute
+                assert.equal(element.charCounter, false); //paper-input attribute
+                assert.equal(element.text, ''); //paper-input value
+                assert.equal(element.textProperty, 'text');
+                assert.equal(element.disableShowClear, false);
+                assert.equal(element.remoteSource, false);
+                assert.equal(element.eventNamespace, '-');
+                assert.equal(element.minLength, 1);
+                assert.equal(element.highlightFirst, false);
+                assert.equal(element.showResultsOnFocus, false);
             });
             
-            test('setLabel', function () {
-                var element = fixture('setLabel');
+            test('autocompleteWithSuffix', function () {
+                var element = fixture('autocompleteWithSuffix');
+                var suffixButton = element.querySelector('#searchButton');
+
                 assert.equal(element.label, 'Search Something');
+                expect(element.querySelector('#searchButton')).to.exist;
             });
             
             test('setArraySource', function () {
+
+                setup(function(done){
+                    let fixElement = querySelector('#setArraySource');
+                    fixElement.players = [
+                        {
+                            numberShirt: 35,
+                            name: 'KD',
+                            text: 'vaffamoc'
+                        },
+                        {
+                            numberShirt: 30,
+                            name: 'Curry',
+                            text: 'giusto'
+                        },
+                        {
+                            numberShirt: 11,
+                            name: 'Culo',
+                            text: 'fatti due domande'
+                        }
+                    ];
+                    flush(done);
+                });
+
+
                 var element = fixture('setArraySource');
-                element.source = [
-                    {
-                        numberShirt: 35,
-                        name: 'KD',
-                        text: 'vaffamoc'
-                    },
-                    {
-                        numberShirt: 30,
-                        name: 'Curry',
-                        text: 'giusto'
-                    },
-                    {
-                        numberShirt: 11,
-                        name: 'Culo',
-                        text: 'fatti due domande'
-                    }
-                ];
+                assert.equal(element.textProperty, 'name');
                 // expect(element.source).to.be.an('array');
-                assert.isArray(element.source, 'There are an array in this attribute')
+                assert.isArray(element.source, 'There is an array in this attribute');
             });
         });
 
-        suite('testDomchanges', function(){
-            test('setValueInput', function () {
-                var element = fixture('setValueInput');
-                element.source = [
-                    {
-                        numberShirt: 35,
-                        name: 'KD',
-                        text: 'vaffamoc'
-                    },
-                    {
-                        numberShirt: 30,
-                        name: 'Curry',
-                        text: 'giusto'
-                    },
-                    {
-                        numberShirt: 11,
-                        name: 'Culo',
-                        text: 'fatti due domande'
-                    }
-                ];
-                element.text = 'cu';
-                let suggestion = element.$.paperAutocompleteSuggestions.value;
-                console.log(suggestion);
-            });
-        });
+        // suite('testDomchanges', function(){
+        //     test('setValueInput', function () {
+        //         var element = fixture('setValueInput');
+        //         element.source = [
+        //             {
+        //                 numberShirt: 35,
+        //                 name: 'KD',
+        //                 text: 'vaffamoc'
+        //             },
+        //             {
+        //                 numberShirt: 30,
+        //                 name: 'Curry',
+        //                 text: 'giusto'
+        //             },
+        //             {
+        //                 numberShirt: 11,
+        //                 name: 'Culo',
+        //                 text: 'fatti due domande'
+        //             }
+        //         ];
+        //         element.text = 'cu';
+        //         let suggestion = element.$.paperAutocompleteSuggestions.value;
+        //         console.log(suggestion);
+        //     });
+        // });
     </script>
 </body>
 
