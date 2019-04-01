@@ -44,17 +44,12 @@
             position: absolute;
             clip: rect(1px, 1px, 1px, 1px);
         }
-
-        paper-autocomplete-suggestions {
-            --suggestions-wrapper: {
-                @apply --paper-autocomplete-suggestions-wrapper;
-            };
-
-            --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
+        paper-autocomplete{
+            --paper-item-min-height: 30px;
         }
         #first{
             margin: 0 auto;
-            max-width: 500px;
+            max-width: 300px;
         }
     </style>
     <script>

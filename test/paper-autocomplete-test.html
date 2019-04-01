@@ -32,19 +32,15 @@
     
     <test-fixture id="setArraySource">
         <template>
-            <paper-autocomplete label="Search Something" text-property="name" source=[[players]]>
-                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
-            </paper-autocomplete>
+            <dom-bind>
+                <template>
+                    <paper-autocomplete id="paper" label="Search Something" text-property="name" source={{players}}>
+                        <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </dom-bind>
         </template>
     </test-fixture>
-
-    <!-- TODO in second Suite test -->
-    <!-- <test-fixture id="setValueInput">
-        <template>
-            <paper-autocomplete label="Search Something" text-property="name"></paper-autocomplete>
-        </template>
-    </test-fixture> -->
-
     <script>
         suite('testingValueAttribute', function () {
 
@@ -73,71 +69,38 @@
             });
             
             test('autocompleteWithSuffix', function () {
-                //warn su paper-material-style
                 var element = fixture('autocompleteWithSuffix');
-                var suffixButton = element.querySelector('#searchButton');
-
                 assert.equal(element.label, 'Search Something');
                 expect(element.querySelector('#searchButton')).to.exist;
             });
+
+            setup(function () {
+                let element = fixture('setArraySource');
+                element.players = [
+                    {
+                        numberShirt: 35,
+                        name: 'KD',
+                        text: 'vaffamoc'
+                    },
+                    {
+                        numberShirt: 30,
+                        name: 'Curry',
+                        text: 'giusto'
+                    },
+                    {
+                        numberShirt: 11,
+                        name: 'Culo',
+                        text: 'fatti due domande'
+                    }
+                ];
+            });
             
             test('setArraySource', function () {
-
-                setup(function(done){
-                    let fixElement = querySelector('#setArraySource');
-                    fixElement.players = [
-                        {
-                            numberShirt: 35,
-                            name: 'KD',
-                            text: 'vaffamoc'
-                        },
-                        {
-                            numberShirt: 30,
-                            name: 'Curry',
-                            text: 'giusto'
-                        },
-                        {
-                            numberShirt: 11,
-                            name: 'Culo',
-                            text: 'fatti due domande'
-                        }
-                    ];
-                    flush(done);
-                });
-
-
-                var element = fixture('setArraySource');
-                assert.equal(element.textProperty, 'name');
-                // expect(element.source).to.be.an('array');
-                assert.isArray(element.source, 'There is an array in this attribute');
+                let paperElement = document.querySelector("#paper");
+                assert.equal(paperElement.textProperty, 'name');
+                assert.isArray(paperElement.source, 'There is an array in this attribute');
             });
         });
-
-        // suite('testDomchanges', function(){
-        //     test('setValueInput', function () {
-        //         var element = fixture('setValueInput');
-        //         element.source = [
-        //             {
-        //                 numberShirt: 35,
-        //                 name: 'KD',
-        //                 text: 'vaffamoc'
-        //             },
-        //             {
-        //                 numberShirt: 30,
-        //                 name: 'Curry',
-        //                 text: 'giusto'
-        //             },
-        //             {
-        //                 numberShirt: 11,
-        //                 name: 'Culo',
-        //                 text: 'fatti due domande'
-        //             }
-        //         ];
-        //         element.text = 'cu';
-        //         let suggestion = element.$.paperAutocompleteSuggestions.value;
-        //         console.log(suggestion);
-        //     });
-        // });
     </script>
 </body>
 

@@ -1,5 +1,9 @@
-import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
-import { flush } from '@polymer/polymer/lib/utils/flush.js';
+import {PolymerElement, html} from '@polymer/polymer';
+import {flush} from '@polymer/polymer/lib/utils/flush.js';
+import '@polymer/paper-styles/typography.js';
+import '@polymer/paper-styles/element-styles/paper-material-styles.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-ripple/paper-ripple.js';
 //LEGACY
 import { templatize } from '@polymer/polymer/lib/utils/templatize.js';
 
@@ -11,9 +15,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 paper-item,
                 :host ::slotted(paper-item) {
                     min-height: var(--paper-item-min-height, 36px);
-                    padding: 0 16px;
                     position: relative;
                     line-height: 18px;
+                    padding: 0;
+                    margin: 0;
 
                     @apply --suggestions-item;
                 }
@@ -23,12 +28,27 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                     background: #eee;
                     color: #333;
                     cursor: pointer;
+                    padding: 0;
+                    margin: 0;
                 }
 
                 paper-item.active,
                 :host ::slotted(paper-item.active) {
                     background: #eee;
                     color: #333;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                div.paper-item,
+                :host ::slotted(div.paper-item){
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    width: 100%;
+                    height: var(--paper-item-min-height, 36px);
+                    justify-content: center;
+                    text-align: center;
                 }
 
                 /**
@@ -43,15 +63,15 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                     @apply --paper-font-headline;
                 }
                 .paper-material {
-                    display: none;
-                    position: absolute;
+                    display: block;
+                    position: relative;
                     width: 100 %;
                     z-index: 1000;
                     background-color: white;
                     max-height: 252px;
                     overflow-y: auto;
 
-                    @apply--suggestions - wrapper;
+                    @apply --suggestions-wrapper;
                 }
             </style>
             <div>
@@ -60,7 +80,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 <!-- Default suggestion template -->
                 <template id="defaultTemplate">
                     <paper-item id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false" on-tap="_onSelect">
-                        <div index="[[index]]">[[_getItemText(item)]]</div>
+                        <div class="paper-item" index="[[index]]">[[_getItemText(item)]]</div>
                         <paper-ripple></paper-ripple>
                     </paper-item>
                 </template>
