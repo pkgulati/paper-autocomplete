@@ -47,39 +47,102 @@
         paper-autocomplete{
             --paper-item-min-height: 30px;
         }
-        #first{
+        .container{
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            max-height: 600px;
+        }
+        .paper-autocomplete{
             margin: 0 auto;
             max-width: 300px;
         }
     </style>
     <script>
+        // Data for the second example
+        let remoteData = [];
+        let xmlhttp = new XMLHttpRequest();
+        let url = "json_for_Remote.json"; 
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                remoteData = JSON.parse(this.responseText);
+            }
+        };
+
+        let remoteFunction = function(event) {
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+            var search = event.detail.text;
+            this.$.paperAutocompleteSuggestions.suggestions(remoteData.filter(function (obj) {
+                return obj.player_name.toLowerCase().indexOf(search) !== -1;
+            }));
+        }
+
+        // setVariable for the first example
         setTimeout(function(){
-            document.querySelector('#suffix').source = [
+            document.querySelector('#first').source = [
                 {
                     numberShirt: 35,
-                    name: 'KD',
-                    text: 'vaffamoc'
+                    name: 'Kevin',
+                    text: 'Only a example'
                 },
                 {
                     numberShirt: 30,
                     name: 'Curry',
-                    text: 'giusto'
+                    text: 'Three points player'
                 },
                 {
-                    numberShirt: 11,
-                    name: 'Culo',
-                    text: 'fatti due domande'
+                    numberShirt: 55,
+                    name: 'Curtis',
+                    text: 'Olimpia player'
+                },
+                {
+                    numberShirt: 73,
+                    name: 'Becurto',
+                    text: 'Fake player for test'
+                },
+                {
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
                 }
             ];
+            // let secondElement = document.querySelector('#remoteBind');
+            // secondElement.onRemoteChange = remoteFunction;
+            let secondElement = document.querySelector('#second');
+            secondElement.addEventListener('autocomplete-change', remoteFunction);
         }, 1000);
     </script>
-    <div>
-        <h2>Paper Autocomplete BASE, whit suffix</h2>
-        <p>Info of this example</p>
-        <div id="first">
-            <paper-autocomplete id="suffix" source="[[players]]" label="Search Something" text-property="name">
-                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+    <div class="container">
+        <h2>Paper Autocomplete, whit suffix</h2>
+        <p>Simple example of paper-autocomplete with suffix, an Array for source and a custom text-property.<br>
+        it's possibile also use prefix element, just change the attributes of the element from suffix to prefix</p>
+        <div class="paper-autocomplete">
+            <paper-autocomplete id="first" min-length="2" label="Search Something" text-property="name">
+                <paper-icon-button slot="suffix" suffix icon="icon:search"></paper-icon-button>
             </paper-autocomplete>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Paper Autocomplete, remote Source</h2>
+        <p>This paper-autocomplete use a remoteSource for data.<br>
+        In this example, we simulated this behavior simple reading a json</p>
+        <div class="paper-autocomplete">
+            <paper-autocomplete id="second" min-length="3" label="Search Something" text-property="player_name" remote-source>
+                <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+            </paper-autocomplete>
+            <!-- <dom-bind id="remoteBind">
+                <template>
+                    <paper-autocomplete id="second" min-length="3" 
+                                        label="Search Something" 
+                                        text-property="player_name" 
+                                        on-autocomplete-change="[[onRemoteChange]]" 
+                                        remote-source>
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </dom-bind> -->
         </div>
     </div>
 </body>

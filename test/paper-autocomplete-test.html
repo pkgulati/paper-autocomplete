@@ -8,7 +8,6 @@
     <title>paper-autocomplete test</title>
 
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <!-- <script src="../node_modules/@polymer/polymer/lib/elements/dom-bind.js"></script> -->
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
     <script type="module" src="../paper-autocomplete.js"></script>
@@ -34,8 +33,20 @@
         <template>
             <dom-bind>
                 <template>
-                    <paper-autocomplete id="paper" label="Search Something" text-property="name" source={{players}}>
-                        <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
+                    <paper-autocomplete id="paperArray" label="Search Something" text-property="name" source={{players}}>
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </dom-bind>
+        </template>
+    </test-fixture>
+
+    <test-fixture id="valueUsingInPaperSuggestions">
+        <template>
+            <dom-bind>
+                <template>
+                    <paper-autocomplete id="paperValueSuggestions" label="Search Something" min-length="3" source={{players}} default-value={{defaultTestValue}} readonly="true">
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
             </dom-bind>
@@ -79,26 +90,67 @@
                 element.players = [
                     {
                         numberShirt: 35,
-                        name: 'KD',
-                        text: 'vaffamoc'
+                        name: 'Kevin',
+                        text: 'Only a example'
                     },
                     {
                         numberShirt: 30,
                         name: 'Curry',
-                        text: 'giusto'
+                        text: 'Three points player'
                     },
                     {
-                        numberShirt: 11,
-                        name: 'Culo',
-                        text: 'fatti due domande'
+                        numberShirt: 23,
+                        name: 'Jordan',
+                        text: 'Best ever player'
                     }
                 ];
             });
             
             test('setArraySource', function () {
-                let paperElement = document.querySelector("#paper");
+                let paperElement = document.querySelector("#paperArray");
                 assert.equal(paperElement.textProperty, 'name');
                 assert.isArray(paperElement.source, 'There is an array in this attribute');
+            });
+
+            setup(function () {
+                let element = fixture('valueUsingInPaperSuggestions');
+                element.players = [
+                    {
+                        numberShirt: 35,
+                        name: 'Kevin',
+                        text: 'Only a example'
+                    },
+                    {
+                        numberShirt: 30,
+                        name: 'Curry',
+                        text: 'Three points player'
+                    },
+                    {
+                        numberShirt: 23,
+                        name: 'Jordan',
+                        text: 'Best ever player'
+                    }
+                ];
+                element.defaultTestValue = {
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
+                };
+            });
+
+            test('valueUsingInPaperSuggestions', function(){
+                let paperElement = document.querySelector("#paperValueSuggestions");
+                let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+                let paperInput = paperElement.$.autocompleteInput;
+                
+                assert.equal(paperElement.minLength, 3);
+                assert.equal(paperSuggestionsElement.minLength, 3);
+
+                assert.isObject(paperElement.defaultValue, 'this value is an object');
+                assert.equal(paperElement.defaultValue.name, 'Jordan');
+                
+                assert.equal(paperElement.readonly, true);
+                assert.equal(paperInput.readonly, true);
             });
         });
     </script>

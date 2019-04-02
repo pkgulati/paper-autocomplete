@@ -396,7 +396,6 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             text: value,
             value: value
         };
-
         if (value && value.length >= this.minLength) {
             this._fireEvent(option, 'change');
         } else {
@@ -520,7 +519,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._value = selectedOption;
         this._text = selectedOption[this.textProperty];
         this._emptyItems();
-        this._fireEvent(selectedOption.objValue, 'selected');
+        this._fireEvent(selectedOption, 'selected');
 
         this.hideSuggestions();
     }
@@ -799,13 +798,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 objValue = objText;
             }
 
-            if (objText.toLowerCase().indexOf(query) === 0) {
+            if (objText.toLowerCase().indexOf(query) >= 0) {
                 // NOTE: the structure of the result object matches with the current template. For custom templates, you
                 // might need to return more data
-                var resultItem = {};
-                resultItem[this.textProperty] = objText;
-                resultItem.objValue = objValue;
-                queryResult.push(resultItem);
+                queryResult.push(objValue);
             }
         }.bind(this));
 
