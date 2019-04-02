@@ -493,7 +493,7 @@ class PaperAutocomplete extends PolymerElement {
      */
     _setOption(option) {
         this.text = option[this.textProperty];
-        this.value = option.value;
+        this.value = option;
         this._showClearButton();
     }
 
