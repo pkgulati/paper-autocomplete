@@ -1,9 +1,9 @@
-import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@polymer/paper-input/paper-input.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@polymer/iron-icon/iron-icon.js';
-import './paper-autocomplete-suggestions.js';
+import { html, PolymerElement } from '@polymer/polymer/polymer-element';
+import '@polymer/iron-flex-layout/iron-flex-layout';
+import '@polymer/paper-input/paper-input';
+import '@polymer/paper-icon-button/paper-icon-button';
+import '@polymer/iron-icon/iron-icon';
+import './paper-autocomplete-suggestions';
 
 class PaperAutocomplete extends PolymerElement {
     static get template() {
@@ -46,8 +46,9 @@ class PaperAutocomplete extends PolymerElement {
                 }
 
                 paper-autocomplete-suggestions {
+
                     --suggestions-wrapper: {
-                    @apply --paper-autocomplete-suggestions-wrapper;
+                        @apply --paper-autocomplete-suggestions-wrapper;
                     };
 
                     --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
@@ -91,7 +92,7 @@ class PaperAutocomplete extends PolymerElement {
                         <slot name="suffix" slot="suffix"></slot>
                     </paper-input>
                     <!-- to announce current selection to screen reader -->
-                    <span id="autocompleteStatus" role="status" class="sr-only">[[_highlightedSuggestion.textValue]]</span>
+                    <!-- <span id="autocompleteStatus" role="status" class="sr-only">[[_highlightedSuggestion.textValue]]</span> -->
                 </div>
 
                 <paper-autocomplete-suggestions for="autocompleteInput"
@@ -421,7 +422,7 @@ class PaperAutocomplete extends PolymerElement {
             detail:
             {
                 id: id,
-                value: option,
+                value: option.value,
                 text: option[this.textProperty] || option.text,
                 target: this
             }
@@ -492,7 +493,7 @@ class PaperAutocomplete extends PolymerElement {
      */
     _setOption(option) {
         this.text = option[this.textProperty];
-        this.value = option;
+        this.value = option.value;
         this._showClearButton();
     }
 

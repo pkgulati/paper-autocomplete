@@ -1,11 +1,11 @@
 import {PolymerElement, html} from '@polymer/polymer';
-import {flush} from '@polymer/polymer/lib/utils/flush.js';
-import '@polymer/paper-styles/typography.js';
-import '@polymer/paper-styles/element-styles/paper-material-styles.js';
-import '@polymer/paper-item/paper-item.js';
-import '@polymer/paper-ripple/paper-ripple.js';
+import {flush} from '@polymer/polymer/lib/utils/flush';
+import '@polymer/paper-styles/typography';
+import '@polymer/paper-styles/element-styles/paper-material-styles';
+import '@polymer/paper-item/paper-item';
+import '@polymer/paper-ripple/paper-ripple';
 //LEGACY
-import { templatize } from '@polymer/polymer/lib/utils/templatize.js';
+import { templatize } from '@polymer/polymer/lib/utils/templatize';
 
 class PaperAutocompleteSuggestions extends PolymerElement {
 
@@ -41,7 +41,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 }
 
                 div.paper-item,
-                :host ::slotted(div.paper-item){
+                :host ::slotted(div.paper-item) {
                     display: flex;
                     flex-direction: column;
                     position: relative;
@@ -520,7 +520,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._value = selectedOption;
         this._text = selectedOption[this.textProperty];
         this._emptyItems();
-        this._fireEvent(selectedOption, 'selected');
+        this._fireEvent(selectedOption.objValue, 'selected');
 
         this.hideSuggestions();
     }

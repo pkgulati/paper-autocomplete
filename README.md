@@ -35,8 +35,8 @@ open http://localhost:8081/components/@p3e/paper-autocomplete/test/paper-autocom
 ###### Difference Usage between VScode and not
 With VScode you see the result and log in the **_DEBUG CONSOLE_**.  
 Without VScode you must use the **_Inspect Element_** of your default Browser.  
-If will you use VScode, **_remember_**, you must config the debbuger in .vscode folder,  
-my .vscode folder is ignored by .gitignore
+If will you use VScode, **_remember_**, you must config the debbuger in .vscode folder.  
+(my .vscode folder is ignored by gitignore)
 
 #### To run demo
 ```
