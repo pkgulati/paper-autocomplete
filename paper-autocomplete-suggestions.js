@@ -115,7 +115,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
              */
             maxViewableItems: {
                 type: Number,
-                value: 7
+                value: 5
             },
 
             /**
@@ -315,10 +315,6 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         super.connectedCallback();
         this._input = this.parentNode.querySelector(`#${this.getAttribute('for')}`);
 
-        // console.warn('input', this._input);
-        // console.warn('cazzo è?', this.getAttribute('for'));
-        
-
         if (this._input === null) {
             throw new Error('Cannot find input field with id: ' + this.for);
         }
@@ -391,7 +387,6 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     _remoteSuggestions() {
         var value = this._input.value;
-
         var option = {
             text: value,
             value: value
@@ -786,6 +781,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
        */
     queryFn(datasource, query) {
         var queryResult = [];
+
+        if(!datasource){
+            return;
+        }
 
         datasource.forEach(function (item) {
             var objText, objValue;

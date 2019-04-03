@@ -52,6 +52,19 @@
             </dom-bind>
         </template>
     </test-fixture>
+
+    <test-fixture id="remoteSource">
+        <!-- <template>
+            <dom-bind> -->
+                <template>
+                    <paper-autocomplete id="autocompleteRemoteSource" label="Search Something" text-property="player_name" remote-source>
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            <!-- </dom-bind>
+        </template> -->
+    </test-fixture>
+
     <script>
         suite('testingValueAttribute', function () {
 
@@ -151,6 +164,42 @@
                 
                 assert.equal(paperElement.readonly, true);
                 assert.equal(paperInput.readonly, true);
+            });
+
+            test('remoteSource', function(){
+                //SET DATA for test
+                let element = fixture('remoteSource');
+                // let element = document.querySelector("#autocompleteRemoteSource");
+                let remoteData = [];
+                let xmlhttp = new XMLHttpRequest();
+                let url = "json_for_Remote.json";
+
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        remoteData = JSON.parse(this.responseText);
+                    }
+                };
+                ///
+
+                // Start search with 'del' string
+                // element.$.paperAutocompleteSuggestions._input.value = 'del';
+                // element.$.paperAutocompleteSuggestions._remoteSuggestions();
+                // element.$.paperAutocompleteSuggestions._fireEvent(option, 'change');
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+                console.warn(remoteData);
+                element.suggestions(remoteData.filter(function (obj) {
+                    return obj.player_name.toLowerCase().indexOf('del') !== -1;
+                }));
+
+                // assert.isArray(element.$.paperAutocompleteSuggestions._suggestions, 'There is an array in this attribute');
+                // assert.equal(element.$.paperAutocompleteSuggestions._suggestions.length, 1);
+
+                // Select first result
+                element.$.paperAutocompleteSuggestions._selection(0);
+
+                // assert.isObject(element.value, 'This value is an Object');
+                // assert.equal(element.value.player_number, 100);
             });
         });
     </script>

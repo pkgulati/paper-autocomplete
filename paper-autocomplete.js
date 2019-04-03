@@ -368,6 +368,10 @@ class PaperAutocomplete extends PolymerElement {
             'autocomplete' + this.eventNamespace + 'selected',
             this._onAutocompleteSelected.bind(this)
         );
+        this.$.paperAutocompleteSuggestions.addEventListener(
+            'autocomplete' + this.eventNamespace + 'change',
+            this._onAutocompleteChange.bind(this)
+        );
 
         if (this.defaultValue) {
             this._setOption(this.defaultValue);
@@ -433,10 +437,6 @@ class PaperAutocomplete extends PolymerElement {
      * On text event handler
      */
     _textObserver(text) {
-        this._fireEvent({
-            text: this.text,
-            value: this.value
-        }, 'change');
         if (text && text.trim()) {
             this._showClearButton();
         } else {
@@ -448,9 +448,17 @@ class PaperAutocomplete extends PolymerElement {
      * On autocomplete selection
      */
     _onAutocompleteSelected(evt) {
-        var selection = evt.detail;
+        var selection = evt.detail.value;
         this.value = selection.value;
         this.text = selection.text;
+    }
+    
+    /**
+     * On autocomplete change
+     */
+    _onAutocompleteChange(evt) {
+        var selection = evt.detail;
+        this._fireEvent(selection.value, 'change');
     }
 
     /**
