@@ -689,14 +689,14 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     _fireEvent(option, evt) {
         var id = this._getId();
         var event = 'autocomplete' + this.eventNamespace + evt;
-
         this.dispatchEvent(new CustomEvent(event, {
             detail: {
                 id: id,
                 value: option,
-                text: option[this.textProperty],
-                target: this
-            }
+                text: option.text
+            },
+            bubbles: true,
+            composed: true
         }));
     }
 

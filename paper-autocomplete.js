@@ -363,16 +363,6 @@ class PaperAutocomplete extends PolymerElement {
 
     ready() {
         super.ready();
-
-        this.$.paperAutocompleteSuggestions.addEventListener(
-            'autocomplete' + this.eventNamespace + 'selected',
-            this._onAutocompleteSelected.bind(this)
-        );
-        this.$.paperAutocompleteSuggestions.addEventListener(
-            'autocomplete' + this.eventNamespace + 'change',
-            this._onAutocompleteChange.bind(this)
-        );
-
         if (this.defaultValue) {
             this._setOption(this.defaultValue);
         }

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Paper-autocomplete Daisy Demo</title>
     <script type="module" src="../paper-autocomplete.js"></script>
+    <script type="module" src="custom-template-demo.js"></script>
 </head>
 
 <body>
@@ -57,6 +58,11 @@
             margin: 0 auto;
             max-width: 300px;
         }
+
+        .custom-template{
+            width: 300px;
+            max-width: 550px !important;
+        }
     </style>
     <script>
         // Data for the second example
@@ -70,11 +76,14 @@
             }
         };
 
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
         let remoteFunction = function(event) {
             xmlhttp.open("GET", url, true);
             xmlhttp.send();
             var search = event.detail.text;
-            this.$.paperAutocompleteSuggestions.suggestions(remoteData.filter(function (obj) {
+            this.suggestions(remoteData.filter(function (obj) {
                 return obj.player_name.toLowerCase().indexOf(search) !== -1;
             }));
         }
@@ -132,17 +141,14 @@
             <paper-autocomplete id="second" min-length="3" label="Search Something" text-property="player_name" remote-source>
                 <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
             </paper-autocomplete>
-            <!-- <dom-bind id="remoteBind">
-                <template>
-                    <paper-autocomplete id="second" min-length="3" 
-                                        label="Search Something" 
-                                        text-property="player_name" 
-                                        on-autocomplete-change="[[onRemoteChange]]" 
-                                        remote-source>
-                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
-                    </paper-autocomplete>
-                </template>
-            </dom-bind> -->
+        </div>
+    </div>
+    <div class="container">
+        <h2>Paper Autocomplete, Custom Template</h2>
+        <p>This paper-autocomplete read Json to popolate her source, and have a custom Template<br>
+        This template is based on json data structure</p>
+        <div class="paper-autocomplete custom-template">
+            <custom-template></custom-template>
         </div>
     </div>
 </body>
