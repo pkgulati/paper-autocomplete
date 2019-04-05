@@ -308,7 +308,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         // this._suggestionTemplate.__dataHost = this;
         
         //LEGACY
-        templatize(this.$.defaultTemplate, this);
+        // templatize(this.$.defaultTemplate, this);
+        // templatize(this._getSuggestionTemplate(), this);
     }
 
     connectedCallback() {
@@ -435,12 +436,26 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         // <------------------------------------------------->
     }
 
-    _suggestionTemplate() {
+    _getSuggestionTemplate() {
+        let element = document.querySelector('#customAutocomplete');
+
         if (this.__customTplRef) {
             return this.__customTplRef;
         }
-        var customTemplate = this.getEffectiveChildren();
-        this.__customTplRef = customTemplate.length > 0 ? customTemplate[0] : this.$.defaultTemplate;
+
+        // NEW
+        // if (this.$.templates) {
+        // var customTemplate = this.$.templates;
+        if (element.$.customTemplate) {
+            var customTemplate = element.$.customTemplate;
+            this.__customTplRef = customTemplate ? customTemplate : this.$.defaultTemplat;
+        }else{
+            this.__customTplRef = this.$.defaultTemplat;
+        }
+
+        //OLD
+        // var customTemplate = elementA.$.customTemplate;
+        // this.__customTplRef = customTemplate ? customTemplate : this.$.defaultTemplate;
 
         return this.__customTplRef;
     }
@@ -454,7 +469,13 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         var suggestionsContainer = this.$.suggestionsWrapper;
         this._clearSuggestions();
         suggestions.forEach((result, index) => {
-            let template = this.$.defaultTemplate;
+            
+            /// TRY For custom template
+            // let template = this.$.defaultTemplate;
+            let template = this._getSuggestionTemplate();
+            console.warn(template);
+            ///----------------------------------------
+
             // clone the template and bind with the model, in Polymer 3 it's possible to be templetaize only one once
             // so, this is necessary to clone the template.
             if (template.__templatizeOwner) { //PORCATA?? [lo scopriremo solo vivendo]

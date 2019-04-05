@@ -2,33 +2,67 @@ import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import '@polymer/paper-item/paper-item';
 import '@polymer/paper-ripple/paper-ripple';
 import '../paper-autocomplete';
+//LEGACY
+import { templatize } from '@polymer/polymer/lib/utils/templatize';
 
 class CustomTemplate extends PolymerElement {
     static get template() {
         return html`
-            <style>
-                .container{
-                    display: flex;
-                    flex-direction: column;
-                }
+        <!-- <style>
+                            .container{
+                                display: flex;
+                                flex-direction: column;
+                            }
 
-                .player-number {
-                color: #333;
-                }
+                            .info{
+                                padding: 2px;
+                            }
 
-                .player-name,  .player-points{
-                margin-top: 4px;
-                color: #999;
-                }
-            </style>
+                            .info > div{
+                                padding: 1px;
+                                text-align: center;
+                            }
+
+                            .player-points {
+                                background-color: #333;
+                            }
+
+                            .player-name,  .player-number{
+                                margin-top: 4px;
+                                background-color: #999;
+                            }
+                        </style> -->
             <div class="container">
-                <paper-autocomplete label="Select Player" source="[[players]]" text-property="player_name">
-                    <template slot="autocomplete-custom-template">
+                <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">
+                    <template id="customTemplate" slot="autocomplete-custom-template">
+                        <style>
+                            .container{
+                                display: flex;
+                                flex-direction: column;
+                            }
+
+                            .info{
+                                padding: 2px;
+                            }
+
+                            .info > div{
+                                padding-left: 2px;
+                            }
+
+                            .player-number {
+                                color: #333;
+                            }
+
+                            .player-name,  .player-points{
+                                margin-top: 4px;
+                                color: #999;
+                            }
+                        </style>
                         <paper-item class="custom-item" on-tap="_onSelect" id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false">
-                            <div class="container">
-                                <div class="player-number">[[item.player_number]]</div>
-                                <div class="player-name">[[item.player_name]]</div>
-                                <div class="player-points">[[item.pts]]</div>
+                            <div class="container info">
+                                <div class="player-number">Number Shirt:[[item.player_number]]</div>
+                                <div class="player-name">Name: [[item.player_name]]</div>
+                                <div class="player-points">pts Game: [[item.pts]]</div>
                             </div>
                             <paper-ripple></paper-ripple>
                         </paper-item>
@@ -334,14 +368,13 @@ class CustomTemplate extends PolymerElement {
 
     ready(){
         super.ready();
-        let paperAutocomplete = document.querySelector('paper-autocomplete');
+        let paperAutocomplete = this.$.paperAutocompleteCustomTemplate;
         paperAutocomplete._queryFn = this._queryFn;
         paperAutocomplete.addEventListener('autocomplete-selected', paperAutocomplete.onSelectHandler);
+        templatize(this.$.customTemplate, this);
     }
 
     _queryFn(dataSource, query){
-        console.warn(dataSource);
-        console.warn(query);
         dataSource.filter(function (obj) {
             return obj.player_name.toLowerCase().indexOf(query) !== -1;
         })
