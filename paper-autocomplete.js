@@ -2,7 +2,7 @@ import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import '@polymer/iron-flex-layout/iron-flex-layout';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icon/iron-icon';
+import '@polymer/iron-icons/iron-icons';
 import './paper-autocomplete-suggestions';
 
 class PaperAutocomplete extends PolymerElement {
@@ -88,7 +88,7 @@ class PaperAutocomplete extends PolymerElement {
                                 aria-controls="autocompleteStatus suggestionsWrapper">
 
                         <slot name="prefix" slot="prefix"></slot>
-                        <paper-icon-button slot="suffix" suffix id="clear" icon="clear" on-click="_clear"></paper-icon-button>
+                        <paper-icon-button slot="suffix" suffix id="clear" icon="icons:clear" on-click="_clear"></paper-icon-button>
                         <slot name="suffix" slot="suffix"></slot>
                     </paper-input>
                     <!-- to announce current selection to screen reader -->
