@@ -108,7 +108,7 @@ class PaperAutocomplete extends PolymerElement {
                                                 highlight-first="[[highlightFirst]]"
                                                 show-results-on-focus="[[showResultsOnFocus]]">
 
-                    <slot id="templates" name="autocomplete-custom-template"></slot>
+                    <slot id="customTemplate" name="autocomplete-custom-template"></slot>
                 </paper-autocomplete-suggestions>
             </div>
         `;

@@ -86,7 +86,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 </template>
 
                 <!-- Custom template -->
-                <slot id="templates" name="autocomplete-custom-template"></slot>
+                <slot id="customTemplate" name="autocomplete-custom-template"></slot>
             </div>
         `
     }
@@ -291,25 +291,11 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
         this._value = this.value;
 
-        //IMPORTANT?? try without
-        // This is important to be able to access component methods inside the templates used with Templatizer
-        // this.dataHost = this;
-
         // Need to capture mousedown to prevent the focus to switch from input field when user clicks in the scrollbar
         // and the autosuggest is a child of an element with tabindex.
         this.$.suggestionsWrapper.addEventListener('mousedown', function (event) {
             event.preventDefault();
         });
-
-        //IMPORTANT?? try without
-        // We need to enforce that dataHost is the suggestions and not the custom polymer element where the template
-        // is defined. If we do not do this, it won't be possible to access paperSuggestions from the custom template
-        // TODO: find a way to achieve this without modifying Polymer internal properties
-        // this._suggestionTemplate.__dataHost = this;
-        
-        //LEGACY
-        // templatize(this.$.defaultTemplate, this);
-        // templatize(this._getSuggestionTemplate(), this);
     }
 
     connectedCallback() {
@@ -433,30 +419,19 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         } else {
             this._suggestions = [];
         }
-        // <------------------------------------------------->
     }
 
     _getSuggestionTemplate() {
-        let element = document.querySelector('#customAutocomplete');
-
         if (this.__customTplRef) {
             return this.__customTplRef;
         }
-
-        // NEW
-        // if (this.$.templates) {
-        // var customTemplate = this.$.templates;
-        if (element.$.customTemplate) {
-            var customTemplate = element.$.customTemplate;
-            this.__customTplRef = customTemplate ? customTemplate : this.$.defaultTemplat;
+        let element = this.querySelector('slot').assignedNodes()[0];
+        if (element) {
+            element.__dataHost = this;
+            this.__customTplRef = element;
         }else{
-            this.__customTplRef = this.$.defaultTemplat;
+            this.__customTplRef = this.$.defaultTemplate;
         }
-
-        //OLD
-        // var customTemplate = elementA.$.customTemplate;
-        // this.__customTplRef = customTemplate ? customTemplate : this.$.defaultTemplate;
-
         return this.__customTplRef;
     }
 
@@ -469,16 +444,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         var suggestionsContainer = this.$.suggestionsWrapper;
         this._clearSuggestions();
         suggestions.forEach((result, index) => {
-            
-            /// TRY For custom template
-            // let template = this.$.defaultTemplate;
             let template = this._getSuggestionTemplate();
-            console.warn(template);
-            ///----------------------------------------
-
             // clone the template and bind with the model, in Polymer 3 it's possible to be templetaize only one once
             // so, this is necessary to clone the template.
-            if (template.__templatizeOwner) { //PORCATA?? [lo scopriremo solo vivendo]
+            if (template.__templatizeOwner) {
                 template.__templatizeOwner = null;
             }
             //LEGACY
@@ -722,7 +691,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     }
 
     _onSelect(event) {
-        this._selection(event.target.index);
+        this._selection(event.currentTarget.getContentChildren()[0].index);
     }
 
     /**

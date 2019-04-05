@@ -8,30 +8,6 @@ import { templatize } from '@polymer/polymer/lib/utils/templatize';
 class CustomTemplate extends PolymerElement {
     static get template() {
         return html`
-        <!-- <style>
-                            .container{
-                                display: flex;
-                                flex-direction: column;
-                            }
-
-                            .info{
-                                padding: 2px;
-                            }
-
-                            .info > div{
-                                padding: 1px;
-                                text-align: center;
-                            }
-
-                            .player-points {
-                                background-color: #333;
-                            }
-
-                            .player-name,  .player-number{
-                                margin-top: 4px;
-                                background-color: #999;
-                            }
-                        </style> -->
             <div class="container">
                 <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">
                     <template id="customTemplate" slot="autocomplete-custom-template">
@@ -43,10 +19,11 @@ class CustomTemplate extends PolymerElement {
 
                             .info{
                                 padding: 2px;
+                                width: 100%;
                             }
 
                             .info > div{
-                                padding-left: 2px;
+                                padding-left: 4px;
                             }
 
                             .player-number {
@@ -58,11 +35,14 @@ class CustomTemplate extends PolymerElement {
                                 color: #999;
                             }
                         </style>
+                        <!-- VERY IMPORTANT: if you want to use custom template -->
+                        <!-- It's very import use this DOM structure, where the paper-item have inside only 2 childs. 
+                        and the first child is a div with the index of the selected element -->
                         <paper-item class="custom-item" on-tap="_onSelect" id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false">
-                            <div class="container info">
+                            <div class="container info" index="[[index]]">
                                 <div class="player-number">Number Shirt:[[item.player_number]]</div>
                                 <div class="player-name">Name: [[item.player_name]]</div>
-                                <div class="player-points">pts Game: [[item.pts]]</div>
+                                <div class="player-points">Pts Game: [[item.pts]]</div>
                             </div>
                             <paper-ripple></paper-ripple>
                         </paper-item>
@@ -370,8 +350,6 @@ class CustomTemplate extends PolymerElement {
         super.ready();
         let paperAutocomplete = this.$.paperAutocompleteCustomTemplate;
         paperAutocomplete._queryFn = this._queryFn;
-        paperAutocomplete.addEventListener('autocomplete-selected', paperAutocomplete.onSelectHandler);
-        templatize(this.$.customTemplate, this);
     }
 
     _queryFn(dataSource, query){
