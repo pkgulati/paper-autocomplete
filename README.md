@@ -45,4 +45,13 @@ npm run serve
 
 ## More Information
 
+#### Custome Style, from outside
+Find some test on the various demo file.
+
+**_--paper-autocomplete-main-color_**: Color for autocomplete details (border & icons).  
+**_--paper-input-font-color_**: Font color only for input value.
+**_--paper-suggestions-color_**: Font color for item suggestions.  
+**_--suggestions-item-min-height_**: Min heigth for item suggestions.  
+
+
 **_TODO_**

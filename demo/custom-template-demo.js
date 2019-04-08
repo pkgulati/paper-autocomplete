@@ -9,6 +9,13 @@ class CustomTemplate extends PolymerElement {
     static get template() {
         return html`
             <div class="container">
+                <style>
+                    :host {
+                        --paper-autocomplete-main-color: #37BF00;
+                        --paper-input-font-color: #00957B;
+                        --suggestions-item-min-height: 100px;
+                    }
+                </style>
                 <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">
                     <template id="customTemplate" slot="autocomplete-custom-template">
                         <style>
@@ -27,12 +34,12 @@ class CustomTemplate extends PolymerElement {
                             }
 
                             .player-number {
-                                color: #333;
+                                color: #2F4858;
                             }
 
                             .player-name,  .player-points{
                                 margin-top: 4px;
-                                color: #999;
+                                color: #007C86;
                             }
                         </style>
                         <!-- VERY IMPORTANT: if you want to use custom template -->

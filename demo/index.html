@@ -14,40 +14,8 @@
             display: block;
             box-sizing: border-box;
             position: relative;
-
-            /* --paper-input-container-focus-color: var(--primary-color, red); */
-
-            --paper-icon-button: {
-                height: 24px;
-                width: 24px;
-                padding: 2px;
-            }
-
-            --paper-input-container-ms-clear: {
-                display: none;
-            }
         }
 
-        .input-wrapper {
-            @apply --layout-horizontal;
-        }
-
-        .input-wrapper paper-input {
-            @apply --layout-flex;
-        }
-
-        #clear {
-            display: none;
-            line-height: 8px;
-        }
-
-        .sr-only {
-            position: absolute;
-            clip: rect(1px, 1px, 1px, 1px);
-        }
-        paper-autocomplete{
-            --paper-item-min-height: 30px;
-        }
         .container{
             display: flex;
             flex-direction: column;
@@ -62,6 +30,12 @@
         .custom-template{
             width: 300px;
             max-width: 550px !important;
+        }
+
+        paper-autocomplete#second{
+            --paper-autocomplete-main-color: #ff494d;
+            --paper-autocomplete-suggestions-color: #9754C8;
+            --paper-input-font-color: #2A64D4;
         }
     </style>
     <script>
@@ -117,8 +91,6 @@
                     text: 'Best ever player'
                 }
             ];
-            // let secondElement = document.querySelector('#remoteBind');
-            // secondElement.onRemoteChange = remoteFunction;
             let secondElement = document.querySelector('#second');
             secondElement.addEventListener('autocomplete-change', remoteFunction);
         }, 1000);

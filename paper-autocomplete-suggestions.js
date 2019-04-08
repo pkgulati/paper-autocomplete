@@ -19,14 +19,12 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                     line-height: 18px;
                     padding: 0;
                     margin: 0;
-
-                    @apply --suggestions-item;
                 }
 
                 paper-item:hover,
                 :host ::slotted(paper-item:hover) {
                     background: #eee;
-                    color: #333;
+                    color: var(--paper-autocomplete-suggestions-color, var(--paper-autocomplete-color));
                     cursor: pointer;
                     padding: 0;
                     margin: 0;
@@ -35,7 +33,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 paper-item.active,
                 :host ::slotted(paper-item.active) {
                     background: #eee;
-                    color: #333;
+                    color: var(--paper-autocomplete-suggestions-color, var(--paper-autocomplete-color));
                     padding: 0;
                     margin: 0;
                 }
@@ -46,29 +44,30 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                     flex-direction: column;
                     position: relative;
                     width: 100%;
-                    height: var(--paper-item-min-height, 36px);
+                    min-height: var(--paper-item-min-height, 36px);
                     justify-content: center;
                     text-align: center;
                 }
 
                 /**
-                * IE11 paper-item min-height bug: https://github.com/PolymerElements/paper-item/issues/35
-                */
-                @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                    paper-item {
-                    height: var(--paper-item-min-height, 36px);
+                *   
+                    media screen for different resolution --
+                    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+                        paper-item {
+                        height: var(--paper-item-min-height, 36px);
+                        }
                     }
-                }
-                .paper-font-headline {
-                    @apply --paper-font-headline;
-                }
+                    .paper-font-headline {
+                        @apply --paper-font-headline;
+                    }
+                */
                 .paper-material {
                     display: block;
                     position: relative;
                     width: 100 %;
                     z-index: 1000;
                     background-color: white;
-                    max-height: 252px;
+                    max-height: 250px;
                     overflow-y: auto;
 
                     @apply --suggestions-wrapper;

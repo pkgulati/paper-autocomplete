@@ -1,5 +1,4 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
-import '@polymer/iron-flex-layout/iron-flex-layout';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
@@ -13,26 +12,7 @@ class PaperAutocomplete extends PolymerElement {
                     display: block;
                     box-sizing: border-box;
                     position: relative;
-
-                    --paper-input-container-focus-color: var(--primary-color, red);
-
-                    --paper-icon-button: {
-                        height: 24px;
-                        width: 24px;
-                        padding: 2px;
-                    }
-
-                    --paper-input-container-ms-clear: {
-                        display: none;
-                    }
-                }
-
-                .input-wrapper {
-                    @apply --layout-horizontal;
-                }
-
-                .input-wrapper paper-input {
-                    @apply --layout-flex;
+                    color: var(--paper-autocomplete-main-color);
                 }
 
                 #clear {
@@ -44,14 +24,16 @@ class PaperAutocomplete extends PolymerElement {
                     position: absolute;
                     clip: rect(1px, 1px, 1px, 1px);
                 }
-
                 paper-autocomplete-suggestions {
-
                     --suggestions-wrapper: {
-                        @apply --paper-autocomplete-suggestions-wrapper;
-                    };
-
-                    --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
+                        color: var(--paper-autocomplete-suggestions-color, var(--paper-autocomplete-main-color));
+                        --paper-item-min-height: var(--suggestions-item-min-height);
+                    }
+                }
+                paper-input{
+                    --paper-input-container-color: var(--paper-autocomplete-main-color);
+                    --paper-input-container-focus-color: var(--paper-autocomplete-main-color);
+                    --paper-input-container-input-color: var(--paper-input-font-color);
                 }
             </style>
             <div class="autocomplete-wrapper">
