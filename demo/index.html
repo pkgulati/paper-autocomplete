@@ -32,39 +32,18 @@
             max-width: 550px !important;
         }
 
-        paper-autocomplete#second{
+        paper-autocomplete#third{
             --paper-autocomplete-main-color: #ff494d;
             --paper-autocomplete-suggestions-color: #9754C8;
             --paper-input-font-color: #2A64D4;
         }
     </style>
     <script>
-        // Data for the second example
+        // Data for the third example
         let remoteData = [];
         let xmlhttp = new XMLHttpRequest();
         let url = "json_for_Remote.json"; 
-
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                remoteData = JSON.parse(this.responseText);
-            }
-        };
-
-        xmlhttp.open("GET", url, true);
-        xmlhttp.send();
-
-        let remoteFunction = function(event) {
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-            var search = event.detail.text;
-            this.suggestions(remoteData.filter(function (obj) {
-                return obj.player_name.toLowerCase().indexOf(search) !== -1;
-            }));
-        }
-
-        // setVariable for the first example
-        setTimeout(function(){
-            document.querySelector('#first').source = [
+        let dataTest = [
                 {
                     numberShirt: 35,
                     name: 'Kevin',
@@ -91,8 +70,31 @@
                     text: 'Best ever player'
                 }
             ];
-            let secondElement = document.querySelector('#second');
-            secondElement.addEventListener('autocomplete-change', remoteFunction);
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                remoteData = JSON.parse(this.responseText);
+            }
+        };
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+        let remoteFunction = function(event) {
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+            var search = event.detail.text;
+            this.suggestions(remoteData.filter(function (obj) {
+                return obj.player_name.toLowerCase().indexOf(search) !== -1;
+            }));
+        }
+
+        // setVariable for the first example
+        setTimeout(function(){
+            document.querySelector('#first').source = dataTest;
+            document.querySelector('#second').source = dataTest;
+            let thirdElement = document.querySelector('#third');
+            thirdElement.addEventListener('autocomplete-change', remoteFunction);
         }, 1000);
     </script>
     <div class="container">
@@ -106,11 +108,20 @@
         </div>
     </div>
     <div class="container">
+        <h2>Paper Autocomplete, whit prefix</h2>
+        <p>Simple example of paper-autocomplete with prefix, an Array for source, custom text-property, .</p>
+        <div class="paper-autocomplete">
+            <paper-autocomplete id="second" label="Search..." text-property="name" show-results-on-focus="true">
+                <paper-icon-button slot="prefix" prefix icon="icons:search"></paper-icon-button>
+            </paper-autocomplete>
+        </div>
+    </div>
+    <div class="container">
         <h2>Paper Autocomplete, remote Source</h2>
         <p>This paper-autocomplete use a remoteSource for data.<br>
         In this example, we simulated this behavior simple reading a json</p>
         <div class="paper-autocomplete">
-            <paper-autocomplete id="second" min-length="3" label="Search Something" text-property="player_name" remote-source>
+            <paper-autocomplete id="third" min-length="3" label="Search Something" text-property="player_name" remote-source>
                 <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
             </paper-autocomplete>
         </div>

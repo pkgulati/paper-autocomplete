@@ -16,61 +16,50 @@
 <body>
 
     <test-fixture id="remoteSource">
-        <!-- <template>
-            <dom-bind> -->
-                <template>
-                    <paper-autocomplete id="autocompleteRemoteSource" label="Search Something" text-property="player_name" remote-source>
-                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
-                    </paper-autocomplete>
-                </template>
-            <!-- </dom-bind>
-        </template> -->
+        <template>
+            <paper-autocomplete id="autocompleteRemoteSource" label="Search Something" text-property="player_name" remote-source>
+                <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+            </paper-autocomplete>
+        </template>
     </test-fixture>
 
     <script>
         suite('testingRemoteSuggestions', function () {
+            let xmlhttp = new XMLHttpRequest();
+            let url = "json_for_Remote.json";
+            let remoteData = [];
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+            xmlhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    remoteData = JSON.parse(this.responseText);
+                    remoteData.filter(function (obj) {
+                        return obj.player_name.toLowerCase().indexOf('del') !== -1;
+                    })
+                }
+            }
 
             test('remoteSource', function(){
                 //SET DATA for test
                 let element = fixture('remoteSource');
-                let xmlhttp = new XMLHttpRequest();
-                let url = "json_for_Remote.json";
-
-                // xmlhttp.onreadystatechange = function () {
-                //     if (this.readyState == 4 && this.status == 200) {
-                //         remoteData = JSON.parse(this.responseText);
-                //     }
-                // };
-                ///
+                let search = 'del';
 
                 // Start search with 'del' string
-                // element.$.paperAutocompleteSuggestions._input.value = 'del';
-                // element.$.paperAutocompleteSuggestions._remoteSuggestions();
-                // element.$.paperAutocompleteSuggestions._fireEvent(option, 'change');
-                // xmlhttp.open("GET", url, true);
-                // xmlhttp.send();
-                let getRemoteData = function(){
-                    let remoteData = [];
-                    xmlhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            remoteData = JSON.parse(this.responseText);
-                            console.warn(remoteData);
-                            remoteData.filter(function (obj) {
-                                return obj.player_name.toLowerCase().indexOf('del') !== -1;
-                            })
-                        }
-                    };
-                }
-                element.suggestions(getRemoteData());
+                element.$.paperAutocompleteSuggestions._input.value = search;
+                element.$.paperAutocompleteSuggestions._handleSuggestions();
+                //then
+                element.suggestions(remoteData.filter(function (obj) {
+                    return obj.player_name.toLowerCase().indexOf('del') !== -1;
+                }));
 
-                // assert.isArray(element.$.paperAutocompleteSuggestions._suggestions, 'There is an array in this attribute');
-                // assert.equal(element.$.paperAutocompleteSuggestions._suggestions.length, 1);
+                assert.isArray(element.$.paperAutocompleteSuggestions._suggestions, 'There is an array in this attribute');
+                assert.equal(element.$.paperAutocompleteSuggestions._suggestions.length, 1);
 
                 // Select first result
                 element.$.paperAutocompleteSuggestions._selection(0);
 
-                // assert.isObject(element.value, 'This value is an Object');
-                // assert.equal(element.value.player_number, 100);
+                assert.isObject(element.value, 'This value is an Object');
+                assert.equal(element.value.player_number, 100);
             });
         });
     </script>

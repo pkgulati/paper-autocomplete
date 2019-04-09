@@ -348,6 +348,8 @@ class PaperAutocomplete extends PolymerElement {
         if (this.defaultValue) {
             this._setOption(this.defaultValue);
         }
+
+        this.addEventListener('autocomplete-selected', this._onAutocompleteSelected);
     }
 
     _sourceChanged(newSource) {
@@ -401,7 +403,9 @@ class PaperAutocomplete extends PolymerElement {
                 value: option.value,
                 text: option[this.textProperty] || option.text,
                 target: this
-            }
+            },
+            bubbles: true,
+            composed: true
         }));
     }
 
@@ -421,8 +425,8 @@ class PaperAutocomplete extends PolymerElement {
      */
     _onAutocompleteSelected(evt) {
         var selection = evt.detail.value;
-        this.value = selection.value;
-        this.text = selection.text;
+        this.value = selection;
+        this.text = selection[this.textProperty];
     }
     
     /**

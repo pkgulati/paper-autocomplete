@@ -33,7 +33,7 @@
         <template>
             <dom-bind>
                 <template>
-                    <paper-autocomplete id="paperArray" label="Search Something" text-property="name" source={{players}}>
+                    <paper-autocomplete id="paperArray" label="Search Something" min-length="3" text-property="name" source={{players}}>
                         <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
@@ -45,7 +45,19 @@
         <template>
             <dom-bind>
                 <template>
-                    <paper-autocomplete id="paperValueSuggestions" label="Search Something" min-length="3" source={{players}} default-value={{defaultTestValue}} readonly="true">
+                    <paper-autocomplete id="paperValueSuggestions" label="Search Something" source={{players}} default-value={{defaultTestValue}} readonly="true" show-results-on-focus="true">
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </dom-bind>
+        </template>
+    </test-fixture>
+    
+    <test-fixture id="testPaperSuggestions">
+        <template>
+            <dom-bind>
+                <template>
+                    <paper-autocomplete id="testSuggestions" label="Search Something" text-property="name" source={{players}} readonly="true" min-length="3">
                         <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
@@ -55,6 +67,34 @@
 
     <script>
         suite('testingValueAttribute', function () {
+
+            let dataTest = [
+                {
+                    numberShirt: 35,
+                    name: 'Kevin',
+                    text: 'Only a example'
+                },
+                {
+                    numberShirt: 30,
+                    name: 'Curry',
+                    text: 'Three points player'
+                },
+                {
+                    numberShirt: 55,
+                    name: 'Curtis',
+                    text: 'Olimpia player'
+                },
+                {
+                    numberShirt: 73,
+                    name: 'Becurto',
+                    text: 'Fake player for test'
+                },
+                {
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
+                }
+            ];;
 
             // in this test, look if the all attributes are init currectly
             test('initAutocompleteDefaultValue', function () {
@@ -88,50 +128,23 @@
 
             setup(function () {
                 let element = fixture('setArraySource');
-                element.players = [
-                    {
-                        numberShirt: 35,
-                        name: 'Kevin',
-                        text: 'Only a example'
-                    },
-                    {
-                        numberShirt: 30,
-                        name: 'Curry',
-                        text: 'Three points player'
-                    },
-                    {
-                        numberShirt: 23,
-                        name: 'Jordan',
-                        text: 'Best ever player'
-                    }
-                ];
+                element.players = dataTest;
             });
             
             test('setArraySource', function () {
                 let paperElement = document.querySelector("#paperArray");
+                let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+                
                 assert.equal(paperElement.textProperty, 'name');
                 assert.isArray(paperElement.source, 'There is an array in this attribute');
+                
+                assert.equal(paperElement.minLength, 3);
+                assert.equal(paperSuggestionsElement.minLength, 3);
             });
 
             setup(function () {
                 let element = fixture('valueUsingInPaperSuggestions');
-                element.players = [
-                    {
-                        numberShirt: 35,
-                        name: 'Kevin',
-                        text: 'Only a example'
-                    },
-                    {
-                        numberShirt: 30,
-                        name: 'Curry',
-                        text: 'Three points player'
-                    },
-                    {
-                        numberShirt: 23,
-                        name: 'Jordan',
-                        text: 'Best ever player'
-                    }
-                ];
+                element.players = dataTest;
                 element.defaultTestValue = {
                     numberShirt: 23,
                     name: 'Jordan',
@@ -143,15 +156,62 @@
                 let paperElement = document.querySelector("#paperValueSuggestions");
                 let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
                 let paperInput = paperElement.$.autocompleteInput;
-                
-                assert.equal(paperElement.minLength, 3);
-                assert.equal(paperSuggestionsElement.minLength, 3);
+
+                assert.equal(paperElement.showResultsOnFocus, true);
+                assert.equal(paperSuggestionsElement.showResultsOnFocus, true);
 
                 assert.isObject(paperElement.defaultValue, 'this value is an object');
                 assert.equal(paperElement.defaultValue.name, 'Jordan');
                 
                 assert.equal(paperElement.readonly, true);
                 assert.equal(paperInput.readonly, true);
+            });
+            
+            setup(function () {
+                let element = fixture('testPaperSuggestions');
+                element.players = dataTest;
+            });
+
+            test('valueUsingInPaperSuggestions', function(){
+                let paperElement = document.querySelector("#testSuggestions");
+                let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+                let paperInput = paperElement.$.autocompleteInput;
+                let fakeEvt;
+
+                //First Check
+                assert.isArray(paperElement.source, 'There is an array in this attribute');
+                assert.isUndefined(paperSuggestionsElement._suggestions, 'Suggestions in this moment is Undefined');
+
+                //wrong Search
+                paperInput.value = 'ba';
+                fakeEvt = {
+                    target: paperInput
+                };
+                
+                assert.equal(paperInput.value, 'ba');
+
+                paperSuggestionsElement._handleSuggestions(fakeEvt);
+
+                expect(paperSuggestionsElement._suggestions).to.be.an('array').that.is.empty;
+                // Check that there aren't suggestions in wrong search
+
+                // rigth Search
+                paperInput.value = 'cur';
+                fakeEvt = {
+                    target: paperInput
+                };
+
+                assert.equal(paperInput.value, 'cur');
+
+                paperSuggestionsElement._handleSuggestions(fakeEvt);
+
+                assert.isArray(paperSuggestionsElement._suggestions, 'In this moment suggestions is an array');
+                
+                paperSuggestionsElement._selection(1);
+
+                assert.isObject(paperElement.value, 'This value is an Object');
+                assert.equal(paperElement.value.numberShirt, 55)
+                //
             });
         });
     </script>

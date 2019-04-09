@@ -317,8 +317,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     disconnectedCallback() {
         super.disconnectedCallback();
 
-        // LEGACY
-        // this.cancelDebouncer('_onSuggestionChanged'); //check this
+        //cancelDebouncer()???
 
         this._input.removeEventListener('keyup', this._bindedFunctions._onKeypress);
         this._input.removeEventListener('focus', this._bindedFunctions._onFocus);
@@ -402,22 +401,20 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._scrollIndex = 0;
 
         var value = event.target.value;
-        
-        //Check condition logic (we can write this better)
-        if (this.showResultsOnFocus) {
+
+        if(this.showResultsOnFocus){
             value = value.toLowerCase();
             this._suggestions = this.queryFn(this.source, value);
-        } else if (value != null && value.length >= this.minLength) {
-            value = value.toLowerCase();
-            this._suggestions = this.queryFn(this.source, value);
-            // Search for the word in the source properties.
-            if (this.source && this.source.length > 0) {
-                // Call queryFn. User can override queryFn() to provide custom search functionality
-                this._suggestions = this.queryFn(this.source, value);
-            }
-        } else {
-            this._suggestions = [];
+            return;
         }
+
+        if (this.source !== null && value !== null && value.length >= this.minLength) {
+            value = value.toLowerCase();
+            this._suggestions = this.queryFn(this.source, value);
+            return;
+        }
+
+        this._suggestions = [];
     }
 
     _getSuggestionTemplate() {
@@ -763,6 +760,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
        * Query function is called on each keystroke to query the data source and returns the suggestions that matches
+       * User can override queryFn() to provide custom search functionality
        * with the filtering logic included.
        * @param {Array} datasource An array containing all items before filtering
        * @param {string} query Current value in the input field

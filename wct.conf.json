@@ -1,0 +1,19 @@
+{
+  "suites": [
+    "test/paper-autocomplete-test.html",
+    "test/paper-autocomplete-remote-test.html"
+  ],
+  "plugins": {
+    "istanbul": {
+      "dir": "./coverage",
+      "reporters": ["text-summary", "lcov"],
+      "include": [
+        "**/*.js"
+      ],
+      "exclude": [
+        "/polymer/polymer.js",
+        "/platform/platform.js"
+      ]
+    }
+  }
+}
