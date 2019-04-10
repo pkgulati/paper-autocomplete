@@ -1,5 +1,7 @@
 # paper-autocomplete  
 
+[![Coverage Status](https://coveralls.io/repos/github/EmanueleDessi/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/EmanueleDessi/paper-autocomplete?branch=master)
+
 
 ## Installation
 ```
