@@ -6,6 +6,7 @@
     "main": "index.html",
     "author": "Dessi Emanuele",
     "devDependencies": {
+        "coveralls": "^3.0.3",
         "polymer-cli": "^1.9.7",
         "wct-browser-legacy": "^1.0.0",
         "wct-istanbul": "^0.14.3",

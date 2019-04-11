@@ -10,7 +10,7 @@ jobs:
       - image: circleci/node:11.8.0-stretch-browsers
     environment:
       COVERALLS_REPO_TOKEN: OPjdAz4CLVD6mCRN27iRDtaOWiu2kpLHc
-      COVERALLS_PARALLEL: true
+      CI_PULL_REQUEST: "service_pull_request"
 
     working_directory: ~/repo
 
@@ -49,5 +49,5 @@ jobs:
           name: Test with Chrome
           command: |
             npm run test-chrome
-      
+            
       - run: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
