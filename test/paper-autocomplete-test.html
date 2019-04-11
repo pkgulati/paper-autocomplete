@@ -41,11 +41,23 @@
         </template>
     </test-fixture>
 
-    <test-fixture id="valueUsingInPaperSuggestions">
+    <test-fixture id="testingValueChange">
         <template>
             <dom-bind>
                 <template>
                     <paper-autocomplete id="paperValueSuggestions" label="Search Something" source={{players}} default-value={{defaultTestValue}} readonly="true" show-results-on-focus="true">
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </dom-bind>
+        </template>
+    </test-fixture>
+    
+    <test-fixture id="testPaperSuggestions">
+        <template>
+            <dom-bind>
+                <template>
+                    <paper-autocomplete id="testSuggestions" label="Search Something" text-property="name" source={{players}} readonly="true" min-length="3">
                         <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
@@ -94,7 +106,7 @@
                     name: 'Jordan',
                     text: 'Best ever player'
                 }
-            ];;
+            ];
 
             // in this test, look if the all attributes are init currectly
             test('initAutocompleteDefaultValue', function () {
@@ -143,7 +155,7 @@
             });
 
             setup(function () {
-                let element = fixture('valueUsingInPaperSuggestions');
+                let element = fixture('testingValueChange');
                 element.players = dataTest;
                 element.defaultTestValue = {
                     numberShirt: 23,
@@ -152,19 +164,39 @@
                 };
             });
 
-            test('valueUsingInPaperSuggestions', function(){
+            test('testingValueChange', function(){
                 let paperElement = document.querySelector("#paperValueSuggestions");
                 let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
                 let paperInput = paperElement.$.autocompleteInput;
+                
+                // console.warn(paperElement.defaultValue); in this log is defined
+                // use to test _setOption,beacouse in ready function "paperElement.defaultValue" is undefined... why?
+                paperElement._setOption({
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
+                });
+
+                let option = paperElement.getOption();
 
                 assert.equal(paperElement.showResultsOnFocus, true);
                 assert.equal(paperSuggestionsElement.showResultsOnFocus, true);
 
                 assert.isObject(paperElement.defaultValue, 'this value is an object');
                 assert.equal(paperElement.defaultValue.name, 'Jordan');
+                assert.equal(paperElement.text, option.text);
+                assert.equal(paperElement.value, option.value);
                 
                 assert.equal(paperElement.readonly, true);
                 assert.equal(paperInput.readonly, true);
+                
+                if (paperElement.validate()) {
+                    paperElement.clear();
+
+                    // After Clear
+                    assert.equal(paperElement.value, null);
+                    assert.equal(paperElement.text, '');
+                }
             });
             
             setup(function () {
@@ -172,7 +204,7 @@
                 element.players = dataTest;
             });
 
-            test('valueUsingInPaperSuggestions', function(){
+            test('testPaperSuggestions', function(){
                 let paperElement = document.querySelector("#testSuggestions");
                 let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
                 let paperInput = paperElement.$.autocompleteInput;
@@ -213,6 +245,9 @@
                 assert.equal(paperElement.value.numberShirt, 55)
                 //
             });
+
+            // NEXT test, simulated the createSuggestionWrapper, and look if exist, then select element and look if the suggestions will be hidden
+            // create new suite? or new test as you like.
         });
     </script>
 </body>
