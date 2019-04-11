@@ -46,3 +46,12 @@ jobs:
           name: Test with Chrome
           command: |
             npm run test-chrome
+
+  deploy:
+    machine:
+      enviroment:
+        COVERALLS_REPO_TOKEN: OPjdAz4CLVD6mCRN27iRDtaOWiu2kpLHc
+        COVERALLS_PARALLEL: true
+    notify:
+      webhooks:
+        - url: https://coveralls.io/webhook?repo_token=OPjdAz4CLVD6mCRN27iRDtaOWiu2kpLHc
