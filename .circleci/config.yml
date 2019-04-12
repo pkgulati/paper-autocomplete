@@ -9,7 +9,6 @@ jobs:
       # specify the version you desire here
       - image: circleci/node:11.8.0-stretch-browsers
     environment:
-      COVERALLS_REPO_TOKEN: OPjdAz4CLVD6mCRN27iRDtaOWiu2kpLHc
       CI_PULL_REQUEST: "service_pull_request"
 
     working_directory: ~/repo
