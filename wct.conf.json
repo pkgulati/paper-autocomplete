@@ -1,7 +1,8 @@
 {
   "suites": [
     "test/paper-autocomplete-test.html",
-    "test/paper-autocomplete-remote-test.html"
+    "test/paper-autocomplete-remote-test.html",
+    "test/paper-autocomplete-DOM-change-test.html"
   ],
   "plugins": {
     "istanbul": {

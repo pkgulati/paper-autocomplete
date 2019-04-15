@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+        <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+        <script type="module" src="../node_modules/@polymer/polymer/lib/utils/flush.js"></script>
+        <script type="module" src="../paper-autocomplete.js"></script>
+        <script type="module" src="../node_modules/@polymer/polymer/lib/utils/debounce.js"></script>
+        <script type="module" src="../node_modules/@polymer/polymer/lib/utils/async.js"></script>
+        <meta>
+    </head>
+
+    <body>
+        <test-fixture id="testPaperItem">
+            <template>
+                <dom-bind>
+                    <template>
+                        <paper-autocomplete id="firstTest" label="Search Something" text-property="name" source={{players}}></paper-autocomplete>
+                    </template>
+                </dom-bind>
+            </template>
+        </test-fixture>
+    </body>
+
+    <script>
+        
+        let dataTest = [
+                {
+                    numberShirt: 35,
+                    name: 'Kevin',
+                    text: 'Only a example'
+                },
+                {
+                    numberShirt: 30,
+                    name: 'Curry',
+                    text: 'Three points player'
+                },
+                {
+                    numberShirt: 55,
+                    name: 'Curtis',
+                    text: 'Olimpia player'
+                },
+                {
+                    numberShirt: 73,
+                    name: 'Becurto',
+                    text: 'Fake player for test'
+                },
+                {
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
+                }
+            ];
+        setup(function(){
+            let elementForPaperItemTest = fixture('testPaperItem');
+            elementForPaperItemTest.players = dataTest;
+        });
+
+        test('testPaperItem', function(){
+            let paperElement = document.querySelector("#firstTest");
+            let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+            let paperInput = paperElement.$.autocompleteInput;
+            let fakeEvt;
+
+            paperInput.value = 'cur';
+            fakeEvt = {
+                target: paperInput
+            };
+
+            paperSuggestionsElement._handleSuggestions(fakeEvt);
+            // paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions);
+            let debounceJob = Debouncer.debounce(debounceJob, microTask, () => paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions));
+            flush();
+
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
+
+            let resultSuggestions = paperSuggestionsElement.$.suggestionsWrapper.querySelectorAll('paper-item');
+            
+            expect(resultSuggestions).to.have.lengthOf(3);
+        });
+    </script>
+
+</html>

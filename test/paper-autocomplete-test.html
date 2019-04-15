@@ -1,15 +1,10 @@
-<!DOCTYPE html><!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-
-    <title>paper-autocomplete test</title>
-
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
-
     <script type="module" src="../paper-autocomplete.js"></script>
 </head>
 
@@ -20,21 +15,13 @@
             <paper-autocomplete></paper-autocomplete>
         </template>
     </test-fixture>
-
-    <test-fixture id="autocompleteWithSuffix">
-        <template>
-            <paper-autocomplete label="Search Something">
-                <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
-            </paper-autocomplete>
-        </template>
-    </test-fixture>
     
     <test-fixture id="setArraySource">
         <template>
             <dom-bind>
                 <template>
                     <paper-autocomplete id="paperArray" label="Search Something" min-length="3" text-property="name" source={{players}}>
-                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                        <paper-icon-button id="searchButton" slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
             </dom-bind>
@@ -46,18 +33,6 @@
             <dom-bind>
                 <template>
                     <paper-autocomplete id="paperValueSuggestions" label="Search Something" source={{players}} default-value={{defaultTestValue}} readonly="true" show-results-on-focus="true">
-                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
-                    </paper-autocomplete>
-                </template>
-            </dom-bind>
-        </template>
-    </test-fixture>
-    
-    <test-fixture id="testPaperSuggestions">
-        <template>
-            <dom-bind>
-                <template>
-                    <paper-autocomplete id="testSuggestions" label="Search Something" text-property="name" source={{players}} readonly="true" min-length="3">
                         <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
@@ -108,6 +83,28 @@
                 }
             ];
 
+            setup(function() {
+                // SECOND TEST
+                let elementArraySource = fixture('setArraySource');
+                elementArraySource.players = dataTest;
+                //
+
+                // THIRD TEST
+                let elementValueChange = fixture('testingValueChange');
+                elementValueChange.players = dataTest;
+                elementValueChange.defaultTestValue = {
+                    numberShirt: 23,
+                    name: 'Jordan',
+                    text: 'Best ever player'
+                };
+                //
+
+                // FOURTH TEST
+                let elementTestPaperSuggestions = fixture('testPaperSuggestions');
+                elementTestPaperSuggestions.players = dataTest;
+                //
+            });
+
             // in this test, look if the all attributes are init currectly
             test('initAutocompleteDefaultValue', function () {
                 var element = fixture('initAutocompleteDefaultValue');
@@ -132,36 +129,18 @@
                 assert.equal(element.showResultsOnFocus, false);
             });
             
-            test('autocompleteWithSuffix', function () {
-                var element = fixture('autocompleteWithSuffix');
-                assert.equal(element.label, 'Search Something');
-                expect(element.querySelector('#searchButton')).to.exist;
-            });
-
-            setup(function () {
-                let element = fixture('setArraySource');
-                element.players = dataTest;
-            });
-            
             test('setArraySource', function () {
                 let paperElement = document.querySelector("#paperArray");
                 let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+
+                assert.equal(paperElement.label, 'Search Something');
+                expect(paperElement.querySelector('#searchButton')).to.exist;
                 
                 assert.equal(paperElement.textProperty, 'name');
                 assert.isArray(paperElement.source, 'There is an array in this attribute');
                 
                 assert.equal(paperElement.minLength, 3);
                 assert.equal(paperSuggestionsElement.minLength, 3);
-            });
-
-            setup(function () {
-                let element = fixture('testingValueChange');
-                element.players = dataTest;
-                element.defaultTestValue = {
-                    numberShirt: 23,
-                    name: 'Jordan',
-                    text: 'Best ever player'
-                };
             });
 
             test('testingValueChange', function(){
@@ -198,11 +177,6 @@
                     assert.equal(paperElement.text, '');
                 }
             });
-            
-            setup(function () {
-                let element = fixture('testPaperSuggestions');
-                element.players = dataTest;
-            });
 
             test('testPaperSuggestions', function(){
                 let paperElement = document.querySelector("#testSuggestions");
@@ -223,6 +197,7 @@
                 assert.equal(paperInput.value, 'ba');
 
                 paperSuggestionsElement._handleSuggestions(fakeEvt);
+                paperSuggestionsElement._onSuggestionsChanged();
 
                 expect(paperSuggestionsElement._suggestions).to.be.an('array').that.is.empty;
                 // Check that there aren't suggestions in wrong search
@@ -236,8 +211,11 @@
                 assert.equal(paperInput.value, 'cur');
 
                 paperSuggestionsElement._handleSuggestions(fakeEvt);
+                paperSuggestionsElement._onSuggestionsChanged();
 
                 assert.isArray(paperSuggestionsElement._suggestions, 'In this moment suggestions is an array');
+
+                paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions);
                 
                 paperSuggestionsElement._selection(1);
 
