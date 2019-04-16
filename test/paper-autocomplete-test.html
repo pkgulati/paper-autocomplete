@@ -6,6 +6,11 @@
     <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../node_modules/wct-browser-legacy/browser.js"></script>
     <script type="module" src="../paper-autocomplete.js"></script>
+    <script>
+        import('../node_modules/sinon/pkg/sinon-esm.js').then((module) => {
+            window.useFakeTimers = module.useFakeTimers;
+        });
+    </script>
 </head>
 
 <body>
@@ -182,7 +187,9 @@
                 let paperElement = document.querySelector("#testSuggestions");
                 let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
                 let paperInput = paperElement.$.autocompleteInput;
-                let fakeEvt;
+                let fakeEvt, clock;
+
+                clock = window.useFakeTimers();
 
                 //First Check
                 assert.isArray(paperElement.source, 'There is an array in this attribute');
@@ -197,7 +204,7 @@
                 assert.equal(paperInput.value, 'ba');
 
                 paperSuggestionsElement._handleSuggestions(fakeEvt);
-                paperSuggestionsElement._onSuggestionsChanged();
+                clock.tick(300);
 
                 expect(paperSuggestionsElement._suggestions).to.be.an('array').that.is.empty;
                 // Check that there aren't suggestions in wrong search
@@ -211,11 +218,10 @@
                 assert.equal(paperInput.value, 'cur');
 
                 paperSuggestionsElement._handleSuggestions(fakeEvt);
-                paperSuggestionsElement._onSuggestionsChanged();
+                clock.tick(600);
+                console.warn(clock);
 
                 assert.isArray(paperSuggestionsElement._suggestions, 'In this moment suggestions is an array');
-
-                paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions);
                 
                 paperSuggestionsElement._selection(1);
 
@@ -223,9 +229,6 @@
                 assert.equal(paperElement.value.numberShirt, 55)
                 //
             });
-
-            // NEXT test, simulated the createSuggestionWrapper, and look if exist, then select element and look if the suggestions will be hidden
-            // create new suite? or new test as you like.
         });
     </script>
 </body>

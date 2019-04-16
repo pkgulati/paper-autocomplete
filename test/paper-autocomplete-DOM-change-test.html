@@ -6,9 +6,13 @@
         <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
         <script src="../node_modules/wct-browser-legacy/browser.js"></script>
         <script type="module" src="../node_modules/@polymer/polymer/lib/utils/flush.js"></script>
+        <script type="module" src="../node_modules/sinon/pkg/sinon-esm.js"></script>
         <script type="module" src="../paper-autocomplete.js"></script>
-        <script type="module" src="../node_modules/@polymer/polymer/lib/utils/debounce.js"></script>
-        <script type="module" src="../node_modules/@polymer/polymer/lib/utils/async.js"></script>
+        <script>
+            import('../node_modules/sinon/pkg/sinon-esm.js').then((module) => {
+                window.useFakeTimers = module.useFakeTimers;
+            });
+        </script>
         <meta>
     </head>
 
@@ -62,17 +66,14 @@
             let paperElement = document.querySelector("#firstTest");
             let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
             let paperInput = paperElement.$.autocompleteInput;
-            let fakeEvt;
-
+            let fakeEvt, clock;
+            clock = window.useFakeTimers();
             paperInput.value = 'cur';
             fakeEvt = {
                 target: paperInput
             };
-
             paperSuggestionsElement._handleSuggestions(fakeEvt);
-            // paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions);
-            let debounceJob = Debouncer.debounce(debounceJob, microTask, () => paperSuggestionsElement._renderSuggestions(paperSuggestionsElement._suggestions));
-            flush();
+            clock.tick(300);
 
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
 
