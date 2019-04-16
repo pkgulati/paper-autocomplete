@@ -21,7 +21,17 @@
             <template>
                 <dom-bind>
                     <template>
-                        <paper-autocomplete id="firstTest" label="Search Something" text-property="name" source={{players}}></paper-autocomplete>
+                        <paper-autocomplete id="firstTest" label="Search Something" show-results-on-focus="true" text-property="name" source={{players}}></paper-autocomplete>
+                    </template>
+                </dom-bind>
+            </template>
+        </test-fixture>
+        
+        <test-fixture id="testingKeypress">
+            <template>
+                <dom-bind>
+                    <template>
+                        <paper-autocomplete id="keypressTest" label="Search Something" text-property="name" source={{players}}></paper-autocomplete>
                     </template>
                 </dom-bind>
             </template>
@@ -60,14 +70,35 @@
         setup(function(){
             let elementForPaperItemTest = fixture('testPaperItem');
             elementForPaperItemTest.players = dataTest;
+            
+            let elementForKeypressTest = fixture('testingKeypress');
+            elementForKeypressTest.players = dataTest;
         });
 
         test('testPaperItem', function(){
+            let keypressEscapeEvt = new KeyboardEvent('keyescape', { 'keyCode': 27, 'which': 27 });
             let paperElement = document.querySelector("#firstTest");
             let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
             let paperInput = paperElement.$.autocompleteInput;
             let fakeEvt, clock;
             clock = window.useFakeTimers();
+            
+            //Look if create the suggestion, becouse showResultsOnFocus is true
+            paperInput.value = '';
+            fakeEvt = {
+                target: paperInput
+            };
+            paperSuggestionsElement._handleSuggestions(fakeEvt);
+            clock.tick(300);
+
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
+            
+            //Force hide suggestions
+            paperSuggestionsElement._onKeypress(keypressEscapeEvt);
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
+
+
+            //Set value for the search
             paperInput.value = 'cur';
             fakeEvt = {
                 target: paperInput
@@ -80,6 +111,37 @@
             let resultSuggestions = paperSuggestionsElement.$.suggestionsWrapper.querySelectorAll('paper-item');
             
             expect(resultSuggestions).to.have.lengthOf(3);
+        });
+
+        test('testingKeypress', function(){
+            let keypressDownEvt = new KeyboardEvent('keydown', { 'keyCode': 40, 'which': 40 });
+            let keypressUpEvt = new KeyboardEvent('keyup', { 'keyCode': 38, 'which': 38 });
+            let keypressEnterEvt = new KeyboardEvent('keyEnter', { 'keyCode': 13, 'which': 13 });
+            let paperElement = document.querySelector("#keypressTest");
+            let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+            let paperInput = paperElement.$.autocompleteInput;
+            let fakeEvt, clock;
+            clock = window.useFakeTimers();
+            paperInput.value = 'cur';
+            fakeEvt = {
+                target: paperInput
+            };
+            paperSuggestionsElement._handleSuggestions(fakeEvt);
+            clock.tick(300);
+
+            //Move to the second suggestion with down event
+            paperSuggestionsElement._onKeypress(keypressDownEvt);
+            paperSuggestionsElement._onKeypress(keypressDownEvt);
+
+            //Turn up with up event
+            paperSuggestionsElement._onKeypress(keypressUpEvt);
+
+            //Select First Suggestion
+            paperSuggestionsElement._onKeypress(keypressEnterEvt);
+            clock.tick(200);
+            
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
+            assert.equal(paperElement.value.numberShirt, 30);
         });
     </script>
 
