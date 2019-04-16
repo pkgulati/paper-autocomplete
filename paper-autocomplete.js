@@ -13,6 +13,7 @@ class PaperAutocomplete extends PolymerElement {
                     box-sizing: border-box;
                     position: relative;
                     color: var(--paper-autocomplete-main-color);
+                    min-height: var(--paper-autocomplete-min-height);
                 }
 
                 #clear {

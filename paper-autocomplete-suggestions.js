@@ -1,4 +1,4 @@
-import {PolymerElement, html} from '@polymer/polymer';
+import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import {flush} from '@polymer/polymer/lib/utils/flush';
 import '@polymer/paper-styles/typography';
 import '@polymer/paper-styles/element-styles/paper-material-styles';

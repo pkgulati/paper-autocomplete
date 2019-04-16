@@ -1,61 +1,59 @@
-import { html, PolymerElement } from '@polymer/polymer/polymer-element';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-ripple/paper-ripple';
-import '../paper-autocomplete';
-//LEGACY
-import { templatize } from '@polymer/polymer/lib/utils/templatize';
+import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-ripple/paper-ripple.js';
+import '@polymer/iron-demo-helpers/demo-snippet.js';
+import '../paper-autocomplete.js';
 
 class CustomTemplate extends PolymerElement {
     static get template() {
         return html`
-            <div class="container">
-                <style>
-                    :host {
-                        --paper-autocomplete-main-color: #37BF00;
-                        --paper-input-font-color: #00957B;
-                        --suggestions-item-min-height: 100px;
-                    }
-                </style>
-                <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">
-                    <template id="customTemplate" slot="autocomplete-custom-template">
-                        <style>
-                            .container{
-                                display: flex;
-                                flex-direction: column;
-                            }
+            <style>
+                :host {
+                    --paper-autocomplete-main-color: #37BF00;
+                    --paper-input-font-color: #00957B;
+                    --suggestions-item-min-height: 100px;
+                    --paper-autocomplete-min-height: 450px;
+                }
+            </style>
+            <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">
+                <template id="customTemplate" slot="autocomplete-custom-template">
+                    <style>
+                        .container{
+                            display: flex;
+                            flex-direction: column;
+                        }
 
-                            .info{
-                                padding: 2px;
-                                width: 100%;
-                            }
+                        .info{
+                            padding: 2px;
+                            width: 100%;
+                        }
 
-                            .info > div{
-                                padding-left: 4px;
-                            }
+                        .info > div{
+                            padding-left: 4px;
+                        }
 
-                            .player-name {
-                                color: #2F4858;
-                            }
+                        .player-name {
+                            color: #2F4858;
+                        }
 
-                            .player-number,  .player-points{
-                                margin-top: 4px;
-                                color: #007C86;
-                            }
-                        </style>
-                        <!-- VERY IMPORTANT: if you want to use custom template -->
-                        <!-- It's very import use this DOM structure, where the paper-item have inside only 2 childs. 
-                        and the first child is a div with the index of the selected element -->
-                        <paper-item class="custom-item" on-tap="_onSelect" id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false">
-                            <div class="container info" index="[[index]]">
-                                <div class="player-number">Number Shirt:[[item.player_number]]</div>
-                                <div class="player-name">Name: [[item.player_name]]</div>
-                                <div class="player-points">Pts Game: [[item.pts]]</div>
-                            </div>
-                            <paper-ripple></paper-ripple>
-                        </paper-item>
-                    </template>
-                </paper-autocomplete>
-            </div>
+                        .player-number,  .player-points{
+                            margin-top: 4px;
+                            color: #007C86;
+                        }
+                    </style>
+                    <!-- VERY IMPORTANT: if you want to use custom template -->
+                    <!-- It's very import use this DOM structure, where the paper-item have inside only 2 childs. 
+                    and the first child is a div with the index of the selected element -->
+                    <paper-item class="custom-item" on-tap="_onSelect" id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false">
+                        <div class="container info" index="[[index]]">
+                            <div class="player-number">Number Shirt:[[item.player_number]]</div>
+                            <div class="player-name">Name: [[item.player_name]]</div>
+                            <div class="player-points">Pts Game: [[item.pts]]</div>
+                        </div>
+                        <paper-ripple></paper-ripple>
+                    </paper-item>
+                </template>
+            </paper-autocomplete>
         `
     }
 

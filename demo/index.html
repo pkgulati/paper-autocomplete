@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>Paper-autocomplete Daisy Demo</title>
-    <script type="module" src="../paper-autocomplete.js"></script>
     <script type="module" src="custom-template-demo.js"></script>
 </head>
 
@@ -19,27 +18,36 @@
         .container{
             display: flex;
             flex-direction: column;
-            height: 400px;
-            max-height: 600px;
+            align-items: center;
+            width: 1000px;
+            margin: 30px auto;
+            border: 1px solid #000;
+            box-shadow: 10px 7px;
         }
         .paper-autocomplete{
             margin: 0 auto;
-            max-width: 300px;
+            max-width: 900px;
         }
 
         .custom-template{
-            width: 300px;
-            max-width: 550px !important;
+            width: 550px;
+            max-width: 650px !important;
         }
 
-        paper-autocomplete#third{
+        paper-autocomplete{
+            margin: 0 auto;
+            max-width: 300px;
+            min-height: 300px;
+        }
+
+        paper-autocomplete#second{
             --paper-autocomplete-main-color: #ff494d;
             --paper-autocomplete-suggestions-color: #9754C8;
             --paper-input-font-color: #2A64D4;
         }
     </style>
     <script>
-        // Data for the third example
+        // Data for the second example
         let remoteData = [];
         let xmlhttp = new XMLHttpRequest();
         let url = "json_for_Remote.json"; 
@@ -92,28 +100,22 @@
         // setVariable for the first example
         setTimeout(function(){
             document.querySelector('#first').source = dataTest;
-            document.querySelector('#second').source = dataTest;
-            let thirdElement = document.querySelector('#third');
-            thirdElement.addEventListener('autocomplete-change', remoteFunction);
+            let secondElement = document.querySelector('#second');
+            secondElement.addEventListener('autocomplete-change', remoteFunction);
         }, 1000);
     </script>
     <div class="container">
         <h2>Paper Autocomplete, whit suffix</h2>
-        <p>Simple example of paper-autocomplete with suffix, an Array for source and a custom text-property.<br>
+        <p>Simple example of paper-autocomplete with suffix, an Array for source, 'showResultsOnFocus' === true and a custom text-property.<br>
         it's possibile also use prefix element, just change the attributes of the element from suffix to prefix</p>
         <div class="paper-autocomplete">
-            <paper-autocomplete id="first" min-length="2" label="Search Something" text-property="name">
-                <paper-icon-button slot="suffix" suffix icon="icons:search"></paper-icon-button>
-            </paper-autocomplete>
-        </div>
-    </div>
-    <div class="container">
-        <h2>Paper Autocomplete, whit prefix</h2>
-        <p>Simple example of paper-autocomplete with prefix, an Array for source, custom text-property, .</p>
-        <div class="paper-autocomplete">
-            <paper-autocomplete id="second" label="Search..." text-property="name" show-results-on-focus="true">
-                <paper-icon-button slot="prefix" prefix icon="icons:search"></paper-icon-button>
-            </paper-autocomplete>
+            <demo-snippet>
+                <template>
+                    <paper-autocomplete id="first" show-results-on-focus="true" label="Search Something" text-property="name">
+                        <paper-icon-button slot="suffix" suffix icon="icons:search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </demo-snippet>
         </div>
     </div>
     <div class="container">
@@ -121,9 +123,13 @@
         <p>This paper-autocomplete use a remoteSource for data.<br>
         In this example, we simulated this behavior simple reading a json</p>
         <div class="paper-autocomplete">
-            <paper-autocomplete id="third" min-length="3" label="Search Something" text-property="player_name" remote-source>
-                <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
-            </paper-autocomplete>
+            <demo-snippet>
+                <template>
+                    <paper-autocomplete id="second" min-length="3" label="Search Something" text-property="player_name" remote-source>
+                        <paper-icon-button slot="suffix" suffix icon="search"></paper-icon-button>
+                    </paper-autocomplete>
+                </template>
+            </demo-snippet>
         </div>
     </div>
     <div class="container">
@@ -132,7 +138,11 @@
         <b>REMEMBER:</b> it's very important using the right DOM structure.<br>
         Look the demo file 'custom-template-demo.js' for more information</p>
         <div class="paper-autocomplete custom-template">
-            <custom-template id="customAutocomplete"></custom-template>
+            <demo-snippet>
+                <template>
+                    <custom-template id="customAutocomplete"></custom-template>
+                </template>
+            </demo-snippet>
         </div>
     </div>
 </body>
