@@ -36,6 +36,16 @@
                 </dom-bind>
             </template>
         </test-fixture>
+        
+        <test-fixture id="testLastFunctions">
+            <template>
+                <dom-bind>
+                    <template>
+                        <paper-autocomplete id="lastFunctions" disabled="true" text-property="name" source={{players}}></paper-autocomplete>
+                    </template>
+                </dom-bind>
+            </template>
+        </test-fixture>
     </body>
 
     <script>
@@ -73,6 +83,9 @@
             
             let elementForKeypressTest = fixture('testingKeypress');
             elementForKeypressTest.players = dataTest;
+            
+            let elementForLastTest = fixture('testLastFunctions');
+            elementForLastTest.players = dataTest;
         });
 
         test('testPaperItem', function(){
@@ -142,6 +155,33 @@
             
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
             assert.equal(paperElement.value.numberShirt, 30);
+        });
+
+        test('testLastFunctions', function(){
+            let paperElement = document.querySelector("#lastFunctions");
+            let paperSuggestionsElement = paperElement.$.paperAutocompleteSuggestions;
+            let paperInput = paperElement.$.autocompleteInput;
+            let fakeEvt, clock;
+            clock = window.useFakeTimers();
+
+            assert.equal(paperElement.disabled, true);
+            paperElement.enable();
+
+            paperInput.value = 'cur';
+            fakeEvt = {
+                target: paperInput
+            };
+            paperSuggestionsElement._handleSuggestions(fakeEvt);
+            clock.tick(300);
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
+
+            paperElement.hideSuggestions();
+            clock.tick(200);
+
+            expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
+
+            paperElement.disable();
+            assert.equal(paperElement.disabled, true);
         });
     </script>
 

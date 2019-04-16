@@ -209,7 +209,7 @@
                 expect(paperSuggestionsElement._suggestions).to.be.an('array').that.is.empty;
                 // Check that there aren't suggestions in wrong search
 
-                // rigth Search
+                // Rigth Search
                 paperInput.value = 'cur';
                 fakeEvt = {
                     target: paperInput
@@ -226,7 +226,6 @@
 
                 assert.isObject(paperElement.value, 'This value is an Object');
                 assert.equal(paperElement.value.numberShirt, 55)
-                //
             });
         });
     </script>

@@ -15,8 +15,7 @@
     },
     "scripts": {
         "test-safari": "polymer test -l safari",
-        "test": "polymer test",
-        "test-chrome": "polymer test -l chrome",
+        "test": "polymer test -l chrome",
         "serve": "polymer serve -o"
     },
     "dependencies": {

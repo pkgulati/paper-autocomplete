@@ -45,8 +45,11 @@ jobs:
 
       # run tests!
       - run: 
-          name: Test with Chrome
+          name: Testing a component on Browsers
           command: |
-            npm run test-chrome
+            npm run test
             
-      - run: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+      - run: 
+          name: Push coverage data
+          command: |
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage

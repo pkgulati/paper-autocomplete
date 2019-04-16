@@ -33,11 +33,11 @@ class CustomTemplate extends PolymerElement {
                                 padding-left: 4px;
                             }
 
-                            .player-number {
+                            .player-name {
                                 color: #2F4858;
                             }
 
-                            .player-name,  .player-points{
+                            .player-number,  .player-points{
                                 margin-top: 4px;
                                 color: #007C86;
                             }
