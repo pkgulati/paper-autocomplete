@@ -1,7 +1,7 @@
 {
     "name": "paper-autocomplete",
     "license": "BSD-3-Clause",
-    "version": "3.0.0",
+    "version": "1.0.2",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "main": "index.html",
