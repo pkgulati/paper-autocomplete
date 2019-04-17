@@ -1,7 +1,7 @@
 {
     "name": "paper-autocomplete",
     "license": "BSD-3-Clause",
-    "version": "1.0.1",
+    "version": "3.0.0",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "main": "index.html",
@@ -18,6 +18,10 @@
         "test-safari": "polymer test -l safari",
         "test": "polymer test -l chrome",
         "serve": "polymer serve -o"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/EmanueleDessi/paper-autocomplete.git"
     },
     "dependencies": {
         "@polymer/iron-demo-helpers": "^3.1.0",
