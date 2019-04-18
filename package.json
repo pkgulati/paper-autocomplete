@@ -1,5 +1,5 @@
 {
-    "name": "paper-autocomplete",
+    "name": "EmanueleDessi/paper-autocomplete",
     "license": "BSD-3-Clause",
     "version": "3.0.0",
     "flat": true,
@@ -11,8 +11,7 @@
         "polymer-cli": "^1.9.7",
         "sinon": "^7.3.1",
         "wct-browser-legacy": "^1.0.0",
-        "wct-istanbul": "^0.14.3",
-        "web-component-tester": "^6.9.2"
+        "wct-istanbul": "^0.14.3"
     },
     "scripts": {
         "test-safari": "polymer test -l safari",

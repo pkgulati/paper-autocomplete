@@ -1,6 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/EmanueleDessi/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/EmanueleDessi/paper-autocomplete?branch=master)
 [![Published on NPM](https://img.shields.io/npm/v/paper-autocomplete.svg)](https://www.npmjs.com/package/paper-autocomplete)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/paper-autocomplete)
 
 # Paper Autocomplete
 
@@ -9,23 +9,23 @@ I updated to polymer 3, now this web-component it's compabile only with Polymer 
 I'm so sorry but there aren't fork in my project from the original repo.   
 This is the source [Repo](https://github.com/ellipticaljs/paper-autocomplete)
 
-`<paper-autocomplete>` used to select one element of an array or from a data source.
+`<paper-autocomplete></paper-autocomplete>` used to select one element of an array or from a data source.
 
-See: [Documentation](TODO),
-     [Demo](TODO).
+See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
+     [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html).
 
 ## Usage
 
 ### Installation
 ```
-npm install --save @p3e/paper-autocomplete
+npm install --save paper-autocomplete
 ```
 
 ### In an html file
 ```html
 <html>
   <head>
-    <script type="module" src="@p3e/paper-autocomplete/paper-autocomplete.js"></script>
+    <script type="module" src="paper-autocomplete/paper-autocomplete.js"></script>
   </head>
   <body>
     <paper-autocomplete label="Search Something" source={{array}}></paper-autocomplete>
@@ -36,7 +36,7 @@ npm install --save @p3e/paper-autocomplete
 ### In a Polymer 3 element
 ```js
 import {PolymerElement, html} from '@polymer/polymer';
-import '@p3e/paper-autocomplete/paper-autocomplete';
+import 'paper-autocomplete/paper-autocomplete';
 
 class SampleElement extends PolymerElement {
   static get template() {
@@ -84,7 +84,7 @@ npm run serve
 ```
 2. run debbuger with vscode or open demo path in your localhost by terminal;
 ```
-open http://localhost:8081/components/@p3e/paper-autocomplete/test/paper-autocomplete-test.html
+open http://localhost:8081/components/paper-autocomplete/test/paper-autocomplete-test.html
 ```
 
 ##### Difference Usage between VScode and not
