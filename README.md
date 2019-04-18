@@ -1,13 +1,6 @@
-[![Coverage Status](https://coveralls.io/repos/github/EmanueleDessi/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/EmanueleDessi/paper-autocomplete?branch=master)
-[![Published on NPM](https://img.shields.io/npm/v/paper-autocomplete.svg)](https://www.npmjs.com/package/paper-autocomplete)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/paper-autocomplete)
+[![Coverage Status](https://coveralls.io/repos/github/fluidnext/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/fluidnext/paper-autocomplete?branch=master)
 
 # Paper Autocomplete
-
-**_Premise_**: This repo has been forked from OLD polymer element, writing in polymer 1.  
-I updated to polymer 3, now this web-component it's compabile only with Polymer 3.0.   
-I'm so sorry but there aren't fork in my project from the original repo.   
-This is the source [Repo](https://github.com/ellipticaljs/paper-autocomplete)
 
 `<paper-autocomplete></paper-autocomplete>` used to select one element of an array or from a data source.
 
@@ -97,5 +90,3 @@ If will you use VScode, **_remember_**, you must config the debbuger in .vscode 
 ```
 npm run serve
 ```
-
-**_TODO_**
