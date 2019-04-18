@@ -11,14 +11,14 @@ See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
 
 ### Installation
 ```
-npm install --save paper-autocomplete
+npm install --save @fluid/paper-autocomplete
 ```
 
 ### In an html file
 ```html
 <html>
   <head>
-    <script type="module" src="paper-autocomplete/paper-autocomplete.js"></script>
+    <script type="module" src="@fluid/paper-autocomplete/paper-autocomplete.js"></script>
   </head>
   <body>
     <paper-autocomplete label="Search Something" source={{array}}></paper-autocomplete>
@@ -29,7 +29,7 @@ npm install --save paper-autocomplete
 ### In a Polymer 3 element
 ```js
 import {PolymerElement, html} from '@polymer/polymer';
-import 'paper-autocomplete/paper-autocomplete';
+import '@fluid/paper-autocomplete/paper-autocomplete';
 
 class SampleElement extends PolymerElement {
   static get template() {
@@ -58,7 +58,7 @@ Find some test on the various demo file.
 
 ### First step clone repo & install dependencies:
 ```
-git clone https://github.com/EmanueleDessi/paper-autocomplete.git
+git clone https://github.com/fluidnext/paper-autocomplete.git
 cd paper-autocomplete
 npm install
 ```
@@ -77,7 +77,7 @@ npm run serve
 ```
 2. run debbuger with vscode or open demo path in your localhost by terminal;
 ```
-open http://localhost:8081/components/paper-autocomplete/test/paper-autocomplete-test.html
+open http://localhost:8081/components/@fluid/paper-autocomplete/test/paper-autocomplete-test.html
 ```
 
 ##### Difference Usage between VScode and not

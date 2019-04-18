@@ -1,5 +1,5 @@
 {
-    "name": "paper-autocomplete",
+    "name": "@fluid/paper-autocomplete",
     "license": "BSD-3-Clause",
     "version": "3.0.0",
     "flat": true,
@@ -21,7 +21,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/EmanueleDessi/paper-autocomplete.git"
+        "url": "https://github.com/fluidnext/paper-autocomplete.git"
     },
     "dependencies": {
         "@polymer/iron-demo-helpers": "^3.1.0",
