@@ -1,5 +1,5 @@
 {
-    "name": "@fluid-next/paper-autocomplete",
+    "name": "@fluidnext-polymer/paper-autocomplete",
     "license": "BSD-3-Clause",
     "version": "3.0.1",
     "flat": true,
@@ -36,5 +36,10 @@
         "@polymer/paper-styles": "^3.0.1",
         "@polymer/polymer": "^3.0.0-pre.12",
         "@webcomponents/webcomponentsjs": "^1.0.20"
-    }
+    },
+    "contributors": [
+      {
+        "name": "Simone Spada"
+      }
+    ]
 }
