@@ -13,7 +13,7 @@ See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
 
 ### Installation
 ```
-npm install --save @fluid-next/paper-autocomplete
+npm install --save @fluidnext-polymer/paper-autocomplete
 ```
 
 ### In an html file
