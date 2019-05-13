@@ -1,5 +1,5 @@
 [![Coverage Status](https://coveralls.io/repos/github/fluidnext/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/fluidnext/paper-autocomplete?branch=master)
-[![Published on NPM](https://img.shields.io/npm/v/paper-autocomplete.svg)](https://www.npmjs.com/package/@fluid-next/paper-autocomplete)
+[![npm version](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-pagination.svg)](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-pagination)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@fluid-next/paper-autocomplete)
 
 # Paper Autocomplete

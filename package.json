@@ -38,8 +38,8 @@
         "@webcomponents/webcomponentsjs": "^1.0.20"
     },
     "contributors": [
-      {
-        "name": "Simone Spada"
-      }
+        {
+            "name": "Simone Spada"
+        }
     ]
 }

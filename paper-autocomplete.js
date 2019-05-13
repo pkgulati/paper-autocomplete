@@ -18,7 +18,6 @@ class PaperAutocomplete extends PolymerElement {
 
                 #clear {
                     display: none;
-                    line-height: 8px;
                 }
 
                 .sr-only {
@@ -68,7 +67,8 @@ class PaperAutocomplete extends PolymerElement {
                                 aria-multiline="false"
                                 aria-activedescendant$="[[_highlightedSuggestion.elementId]]"
                                 aria-disabled$="[[disabled]]"
-                                aria-controls="autocompleteStatus suggestionsWrapper">
+                                aria-controls="autocompleteStatus suggestionsWrapper"
+                    >
 
                         <slot name="prefix" slot="prefix"></slot>
                         <paper-icon-button slot="suffix" suffix id="clear" icon="icons:clear" on-click="_clear"></paper-icon-button>
