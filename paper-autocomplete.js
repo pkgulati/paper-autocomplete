@@ -318,10 +318,6 @@ class PaperAutocomplete extends PolymerElement {
                 value: false
             },
 
-            defaultValue: {
-                type: Object
-            },
-
             /*************
             * PRIVATE
             *************/
@@ -346,8 +342,8 @@ class PaperAutocomplete extends PolymerElement {
 
     ready() {
         super.ready();
-        if (this.defaultValue) {
-            this._setOption(this.defaultValue);
+        if (this.value) {
+            this._setOption();
         }
 
         this.addEventListener('autocomplete-selected', this._onAutocompleteSelected);
@@ -476,9 +472,8 @@ class PaperAutocomplete extends PolymerElement {
      * Sets the current text/value option of the input
      * @param {Object} option
      */
-    _setOption(option) {
-        this.text = option[this.textProperty];
-        this.value = option;
+    _setOption() {
+        this.text = this.value.name;
         this._showClearButton();
     }
 
