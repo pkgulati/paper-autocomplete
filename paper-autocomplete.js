@@ -15,6 +15,38 @@ class PaperAutocomplete extends PolymerElement {
                     color: var(--paper-autocomplete-main-color);
                     min-height: var(--paper-autocomplete-min-height);
                 }
+                
+                /**
+                 * TODO rewrite
+                 */
+                paper-icon-button {
+                
+                    --paper-icon-button : {
+                        padding: 2px;
+                        height: 24px;
+                        width: 24px;
+                       
+                    }
+                    
+                     --iron-icon : {
+                        height: 18px;
+                        width: 18px;
+                        margin-bottom: 9px;
+                     }
+                }
+                
+                ::slotted(paper-icon-button) {
+
+                    padding: 0;
+                    margin: 2px;
+                    top: -4px;
+                    height: 18px;
+                    width: 18px;
+                }
+                
+                :host(paper-icon-button[slot="suffix"]) {
+                    background-color: green;
+                }
 
                 #clear {
                     display: none;
@@ -24,12 +56,14 @@ class PaperAutocomplete extends PolymerElement {
                     position: absolute;
                     clip: rect(1px, 1px, 1px, 1px);
                 }
+                
                 paper-autocomplete-suggestions {
                     --suggestions-wrapper: {
                         color: var(--paper-autocomplete-suggestions-color, var(--paper-autocomplete-main-color));
                         --paper-item-min-height: var(--suggestions-item-min-height);
                     }
                 }
+                
                 paper-input{
                     --paper-input-container-color: var(--paper-autocomplete-main-color);
                     --paper-input-container-focus-color: var(--paper-autocomplete-main-color);
@@ -425,7 +459,7 @@ class PaperAutocomplete extends PolymerElement {
         this.value = selection;
         this.text = selection[this.textProperty];
     }
-    
+
     /**
      * On autocomplete change
      */
