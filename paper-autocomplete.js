@@ -503,10 +503,15 @@ class PaperAutocomplete extends PolymerElement {
      * @param {Object} option
      */
     _changeValue() {
-        if(this.value){
+        switch(true){
+        case !this.value:
+            break;
+        case Object.keys(this.value).length == 0:
+            break;
+        default :
             this.text = this.value[this.textProperty];
+            this._showClearButton();
         }
-        this._showClearButton();
     }
 
     /****************************
