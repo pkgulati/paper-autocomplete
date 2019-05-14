@@ -247,6 +247,7 @@ class PaperAutocomplete extends PolymerElement {
             value: {
                 type: Object,
                 notify: true,
+                value: null,
                 observer: '_changeValue'
             },
 
@@ -396,28 +397,6 @@ class PaperAutocomplete extends PolymerElement {
     }
 
     /**
-     * Clear the input text
-     */
-    _clear() {
-        var option = {
-            text: this.text,
-            value: this.value
-        };
-        // console.warn('option', option);
-        this.value = null;
-        this.text = '';
-
-        this._fireEvent(option, 'reset-blur');
-
-        this._hideClearButton();
-
-        // Fix: https://github.com/PolymerElements/paper-input/issues/493
-        if (!this.$.autocompleteInput.focused) {
-            this.$.autocompleteInput.focus();
-        }
-    }
-
-    /**
      * Dispatches autocomplete events
      */
     _fireEvent(option, evt) {
@@ -499,18 +478,59 @@ class PaperAutocomplete extends PolymerElement {
     }
 
     /**
+     * Clear value and text
+     */
+    _clearValue(){
+        this.text = '';
+        this.value = null;
+        this._hideClearButton();
+    }
+
+    /**
      * Sets the current text/value option of the input
      * @param {Object} option
      */
-    _changeValue() {
-        switch(true){
-            case !this.value:
-                break;
-            case Object.keys(this.value).length == 0:
+    _setValue(value){
+            this.text = value[this.textProperty];
+            this._showClearButton();
+    }
+
+    /**
+     * Clear the input text
+     */
+    _clear(evt) {
+        var option = {
+            text: this.text,
+            value: this.value
+        };
+        // console.warn('option', option);
+
+        this._clearValue();
+
+        this._fireEvent(option, 'reset-blur');
+
+        // Fix: https://github.com/PolymerElements/paper-input/issues/493
+        if (!this.$.autocompleteInput.focused) {
+            this.$.autocompleteInput.focus();
+        }
+    }
+    
+    _changeValue(newValue, oldValue) {
+        // if(newValue && Object.keys(newValue).length > 0 && typeof(newValue) === "object"  && !Array.isArray(newValue)){
+        //     this._setValue(newValue);
+        // } else {
+        //     if(this.text != ''){
+        //         this._setValue(oldValue);
+        //     };
+        //     this._hideClearButton();
+        // }
+        switch (true){
+            case newValue && typeof(newValue) === "object"  && !Array.isArray(newValue) :
+                this._setValue(newValue);
                 break;
             default :
-                this.text = this.value[this.textProperty];
-                this._showClearButton();
+                this._clearValue();
+                break;
         }
     }
 
