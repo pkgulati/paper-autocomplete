@@ -516,14 +516,6 @@ class PaperAutocomplete extends PolymerElement {
     }
     
     _changeValue(newValue, oldValue) {
-        // if(newValue && Object.keys(newValue).length > 0 && typeof(newValue) === "object"  && !Array.isArray(newValue)){
-        //     this._setValue(newValue);
-        // } else {
-        //     if(this.text != ''){
-        //         this._setValue(oldValue);
-        //     };
-        //     this._hideClearButton();
-        // }
         switch (true){
             case newValue && typeof(newValue) === "object"  && !Array.isArray(newValue) :
                 this._setValue(newValue);
@@ -547,20 +539,6 @@ class PaperAutocomplete extends PolymerElement {
             text: this.text,
             value: this.value
         };
-    }
-
-    /**
-     * Disables the input
-     */
-    disable() {
-        this.disabled = true;
-    }
-
-    /**
-     * Enable the input
-     */
-    enable() {
-        this.disabled = false;
     }
 
     /**

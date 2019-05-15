@@ -78,6 +78,7 @@
         // setVariable for the first example
         setTimeout(function(){
             document.querySelector('#first').source = dataTest;
+            document.querySelector('#firstDefault').source = dataTest;
             let secondElement = document.querySelector('#second');
             secondElement.addEventListener('autocomplete-change', remoteFunction);
         }, 1000);
@@ -98,7 +99,7 @@
                     </paper-autocomplete>
                     <br>
                     <br>
-                    <paper-autocomplete show-results-on-focus="true" label="I've a default value" text-property="name" value='{"numberShirt": "73", "name": "Becurto", "text": "Fake player for test"}'>
+                    <paper-autocomplete id="firstDefault" show-results-on-focus="true" label="I've a default value" text-property="name" value='{"numberShirt": "73", "name": "Becurto", "text": "Fake player for test"}'>
                         <paper-icon-button slot="suffix" suffix icon="icons:search"></paper-icon-button>
                     </paper-autocomplete>
                 </template>
