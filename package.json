@@ -39,8 +39,10 @@
     },
     "contributors": [
         {
-            "name": "Antonio Visalli",
             "name": "Simone Spada"
+        },
+        {
+            "name": "Antonio Visalli"
         }
     ]
 }
