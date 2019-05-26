@@ -23,7 +23,7 @@
                 </dom-bind>
             </template>
         </test-fixture>
-        
+
         <test-fixture id="testingKeypress">
             <template>
                 <dom-bind>
@@ -33,7 +33,7 @@
                 </dom-bind>
             </template>
         </test-fixture>
-        
+
         <test-fixture id="testLastFunctions">
             <template>
                 <dom-bind>
@@ -46,7 +46,7 @@
     </body>
 
     <script>
-        
+
         let dataTest = [
                 {
                     numberShirt: 35,
@@ -77,10 +77,10 @@
         setup(function(){
             let elementForPaperItemTest = fixture('testPaperItem');
             elementForPaperItemTest.players = dataTest;
-            
+
             let elementForKeypressTest = fixture('testingKeypress');
             elementForKeypressTest.players = dataTest;
-            
+
             let elementForLastTest = fixture('testLastFunctions');
             elementForLastTest.players = dataTest;
         });
@@ -92,7 +92,7 @@
             let paperInput = paperElement.$.autocompleteInput;
             let fakeEvt, clock;
             clock = window.useFakeTimers();
-            
+
             //Look if create the suggestion, becouse showResultsOnFocus is true
             paperInput.value = '';
             fakeEvt = {
@@ -102,7 +102,7 @@
             clock.tick(300);
 
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
-            
+
             //Force hide suggestions
             paperSuggestionsElement._onKeypress(keypressEscapeEvt);
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
@@ -119,7 +119,7 @@
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.exist;
 
             let resultSuggestions = paperSuggestionsElement.$.suggestionsWrapper.querySelectorAll('paper-item');
-            
+
             expect(resultSuggestions).to.have.lengthOf(3);
         });
 
@@ -149,7 +149,7 @@
             //Select First Suggestion
             paperSuggestionsElement._onKeypress(keypressEnterEvt);
             clock.tick(200);
-            
+
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
             assert.equal(paperElement.value.numberShirt, 30);
         });
@@ -162,7 +162,6 @@
             clock = window.useFakeTimers();
 
             assert.equal(paperElement.disabled, true);
-            paperElement.enable();
 
             paperInput.value = 'cur';
             fakeEvt = {
@@ -176,9 +175,6 @@
             clock.tick(200);
 
             expect(paperSuggestionsElement.$.suggestionsWrapper.querySelector('paper-item')).to.be.null;
-
-            paperElement.disable();
-            assert.equal(paperElement.disabled, true);
         });
     </script>
 
