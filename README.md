@@ -4,7 +4,7 @@
 
 # Paper Autocomplete
 
-`<paper-autocomplete></paper-autocomplete>` used to select one element of an array or from a data source.
+Is a [Polymer 3](https://polymer-library.polymer-project.org/3.0/docs/devguide/feature-overview) web component used to select one element of an array or from a data source.
 
 See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
      [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html).

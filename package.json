@@ -7,6 +7,7 @@
     "main": "index.html",
     "author": "Dessi Emanuele",
     "devDependencies": {
+        "@polymer/iron-demo-helpers": "^3.1.0",
         "coveralls": "^3.0.3",
         "polymer-cli": "^1.9.7",
         "sinon": "^7.3.1",
@@ -25,7 +26,6 @@
         "url": "https://github.com/fluidnext/paper-autocomplete.git"
     },
     "dependencies": {
-        "@polymer/iron-demo-helpers": "^3.1.0",
         "@polymer/iron-icon": "^3.0.0",
         "@polymer/iron-icons": "^3.0.0",
         "@polymer/iron-pages": "^3.0.1",

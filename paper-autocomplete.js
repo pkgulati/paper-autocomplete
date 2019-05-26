@@ -247,7 +247,7 @@ class PaperAutocomplete extends PolymerElement {
             value: {
                 type: Object,
                 notify: true,
-                value: null,
+                value: () => {return null},
                 observer: '_changeValue'
             },
 
@@ -586,9 +586,9 @@ class PaperAutocomplete extends PolymerElement {
      *
      * @event autocomplete-selected
      * @param {String} id
+     * @param {Object} value
      * @param {String} text
      * @param {Element} target
-     * @param {Object} option
      */
 
     /**
@@ -596,9 +596,9 @@ class PaperAutocomplete extends PolymerElement {
      *
      * @event autocomplete-change
      * @param {String} id
+     * @param {Object} value
      * @param {String} text
      * @param {Element} target
-     * @param {Object} option
      */
 
     /**
@@ -606,9 +606,9 @@ class PaperAutocomplete extends PolymerElement {
      *
      * @event autocomplete-focus
      * @param {String} id
+     * @param {Object} value
      * @param {String} text
      * @param {Element} target
-     * @param {Object} option
      */
 
     /**
@@ -616,9 +616,9 @@ class PaperAutocomplete extends PolymerElement {
      *
      * @event autocomplete-blur
      * @param {String} id
+     * @param {Object} value
      * @param {String} text
      * @param {Element} target
-     * @param {Object} option
      */
 
     /**
@@ -626,9 +626,9 @@ class PaperAutocomplete extends PolymerElement {
      *
      * @event autocomplete-reset-blur
      * @param {String} id
+     * @param {Object} value
      * @param {String} text
      * @param {Element} target
-     * @param {Object} option
      */
 }
 
