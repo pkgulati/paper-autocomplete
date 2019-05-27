@@ -1,11 +1,29 @@
 {
     "name": "@fluidnext-polymer/paper-autocomplete",
-    "license": "BSD-3-Clause",
     "version": "3.0.0",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
-    "main": "index.html",
+    "scripts": {
+        "test": "polymer test",
+        "serve": "polymer serve",
+        "demo": "polymer serve --open"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/fluidnext/paper-autocomplete.git"
+    },
+    "keywords": [
+        "polymer 3",
+        "web component",
+        "html5"
+    ],
     "author": "Dessi Emanuele",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url":  "https://github.com/fluidnext/paper-autocomplete/issues"
+    },
+    "homepage": "https://github.com/fluidnext/paper-autocomplete",
+    "main": "paper-autocomplete.js",
     "devDependencies": {
         "@polymer/iron-demo-helpers": "^3.1.0",
         "coveralls": "^3.0.3",
@@ -15,15 +33,6 @@
         "wct-istanbul": "^0.14.3",
         "web-component-tester": "^6.9.2",
         "@webcomponents/webcomponentsjs": "^2.2.10"
-    },
-    "scripts": {
-        "test-safari": "polymer test -l safari",
-        "test": "polymer test -l chrome",
-        "serve": "polymer serve -o"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/fluidnext/paper-autocomplete.git"
     },
     "dependencies": {
         "@polymer/iron-icon": "^3.0.0",

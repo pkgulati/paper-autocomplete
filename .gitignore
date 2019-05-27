@@ -11,6 +11,7 @@ npm-debug.log*
 
 #Json files
 package-lock.json
+npm-shrinkwrap.json
 
 # Coverage directory used by tools like istanbul
 coverage
@@ -35,3 +36,11 @@ coverage
 # System Files
 .DS_Store
 Thumbs.db
+
+# Other
+*.orig
+*.rej
+*.porig
+
+# Yarn
+yarn.lock

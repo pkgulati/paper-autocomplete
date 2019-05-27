@@ -1,16 +1,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/fluidnext/paper-autocomplete/badge.svg?branch=master)](https://coveralls.io/github/fluidnext/paper-autocomplete?branch=master)
-[![npm version](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-pagination.svg)](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-pagination)
+[![npm version](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-autocomplete.svg)](https://badge.fury.io/js/%40fluidnext-polymer%2Fpaper-autocomplete)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@fluid-next/paper-autocomplete)
 
 # Paper Autocomplete
 
 Is a [Polymer 3](https://polymer-library.polymer-project.org/3.0/docs/devguide/feature-overview) web component used to select one element of an array or from a data source.
 
-See: [Documentation](https://www.webcomponents.org/element/paper-autocomplete),
-     [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html).
+See: [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html).
 
 ## Usage
-
 ### Installation
 ```
 npm install --save @fluidnext-polymer/paper-autocomplete
@@ -20,7 +18,7 @@ npm install --save @fluidnext-polymer/paper-autocomplete
 ```html
 <html>
   <head>
-    <script type="module" src="@fluid-next/paper-autocomplete/paper-autocomplete.js"></script>
+    <script type="module" src="@fluidnext-polymer/paper-autocomplete/paper-autocomplete.js"></script>
   </head>
   <body>
     <paper-autocomplete label="Search Something" source={{array}}></paper-autocomplete>
@@ -31,7 +29,7 @@ npm install --save @fluidnext-polymer/paper-autocomplete
 ### In a Polymer 3 element
 ```js
 import {PolymerElement, html} from '@polymer/polymer';
-import '@fluid-next/paper-autocomplete/paper-autocomplete';
+import '@fluidnext-polymer/paper-autocomplete/paper-autocomplete';
 
 class SampleElement extends PolymerElement {
   static get template() {
@@ -45,8 +43,6 @@ customElements.define('sample-element', SampleElement);
 
 # For Developers
 
-## Demo and Docs
-
 #### Custome Style, from outside
 Find some test on the various demo file.
 
@@ -56,39 +52,36 @@ Find some test on the various demo file.
 **_--suggestions-item-min-height_**: Min heigth for item suggestions.  
 **_--paper-autocomplete-min-height_**: Min heigth for the autocomplete, that wrap also the suggestions.
 
-## Testing & Demo
+#### Contributing
+If you want to send a PR to this element, here are
+the instructions for running the tests and demo locally:
 
-### First step clone repo & install dependencies:
-```
-git clone https://github.com/fluidnext/paper-autocomplete.git
-cd paper-autocomplete
+## Demo and Docs
+
+### Installation
+```sh
+git clone https://github.com/fluidnext/paper-autocomplete
+cd paper-input-file
 npm install
+npm install -g polymer-cli
+npm install -g wct-istanbull
 ```
 
-### To run test whit polymer use:
-```
-npm run test //Test for all installed browser in your pc
-npm run test-safari //Test only for safari browser
+### Running the demo locally
+Open terminal in the project root folder and run the following command.
+```sh
+polymer serve --open
 ```
 
-#### If you have the problem with polymer test, try this (I use this method):
-
-1. open the serve with polymer serve;
+### Running the tests
+Open terminal in the project root folder and run the following command.
+```sh
+polymer test
 ```
-npm run serve
-```
-2. run debbuger with vscode or open demo path in your localhost by terminal;
-```
-open http://localhost:8081/components/@fluid-next/paper-autocomplete/test/paper-autocomplete-test.html
-```
+To see tests details, open the generated "index.html" inside "coverage/lcov-report" folder.
 
 ##### Difference Usage between VScode and not
 With VScode you see the result and log in the **_DEBUG CONSOLE_**.  
 Without VScode you must use the **_Inspect Element_** of your default Browser.  
 If will you use VScode, **_remember_**, you must config the debbuger in .vscode folder.  
 (my .vscode folder is ignored by gitignore)
-
-### To run demo
-```
-npm run serve
-```
