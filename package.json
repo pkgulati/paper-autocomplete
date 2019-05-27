@@ -5,6 +5,7 @@
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
         "test": "polymer test",
+        "testChrome": "polymer test -l chrome",
         "serve": "polymer serve",
         "demo": "polymer serve --open"
     },

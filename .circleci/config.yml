@@ -47,7 +47,7 @@ jobs:
       - run: 
           name: Testing a component on Browsers
           command: |
-            npm run test
+            npm run testChrome
             
       - run: 
           name: Push coverage data
