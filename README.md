@@ -61,7 +61,7 @@ the instructions for running the tests and demo locally:
 ### Installation
 ```sh
 git clone https://github.com/fluidnext/paper-autocomplete
-cd paper-input-file
+cd paper-autocomplete
 npm install
 npm install -g polymer-cli
 npm install -g wct-istanbull
