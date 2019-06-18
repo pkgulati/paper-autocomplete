@@ -4,18 +4,18 @@
 #
 version: 2
 jobs:
-  build:
+  test:
     docker:
       # specify the version you desire here
       - image: circleci/node:11.8.0-stretch-browsers
-    environment:
-      CI_PULL_REQUEST: "service_pull_request"
 
     working_directory: ~/repo
 
     steps:
+      # Checkout project
       - checkout
 
+      # TODO controll comment
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -23,6 +23,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      # Using to create folder for the selenium installation
       - run: mkdir test-reports
 
       - run:
@@ -35,21 +36,65 @@ jobs:
           command: |
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
-          
+
+      # Install npm
       - run: npm install
 
+      # TODO
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: 
+      # Run test
+      # TODO integrate other browser
+      - run:
           name: Testing a component on Browsers
           command: |
-            npm run testChrome
-            
-      - run: 
+            npm run test-chrome
+
+      # Push Coverage Data
+      - run:
           name: Push coverage data
           command: |
             cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+  deploy:
+    docker:
+        # specify the version you desire here
+      - image: circleci/node:11.8.0-stretch-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      # Checkout project
+      - checkout
+
+      # Create the npmrc to authenticate to npm
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+      # Publish Release on NPM after the test
+      - run:
+          name: Publish release on NPM
+          command: npm publish --loglevel verbose --tag latest --access public
+
+workflows:
+  version: 2
+  continuous-delivery-workflow:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
+      - deploy:
+          context: deploy
+          requires:
+            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/

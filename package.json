@@ -1,11 +1,11 @@
 {
     "name": "@fluidnext-polymer/paper-autocomplete",
-    "version": "3.0.0",
+    "version": "3.0.2",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
         "test": "polymer test",
-        "testChrome": "polymer test -l chrome",
+        "test-chrome": "polymer test -l chrome",
         "serve": "polymer serve",
         "demo": "polymer serve --open"
     },

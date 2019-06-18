@@ -12,7 +12,7 @@ class CustomTemplate extends PolymerElement {
                     --paper-autocomplete-main-color: #37BF00;
                     --paper-input-font-color: #00957B;
                     --suggestions-item-min-height: 100px;
-                    --paper-autocomplete-min-height: 450px;
+                    --paper-autocomplete-min-height: 100px;
                 }
             </style>
             <paper-autocomplete id="paperAutocompleteCustomTemplate" label="Select Player" source="[[players]]" text-property="player_name">

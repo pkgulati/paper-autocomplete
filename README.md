@@ -4,9 +4,9 @@
 
 # Paper Autocomplete
 
-Is a [Polymer 3](https://polymer-library.polymer-project.org/3.0/docs/devguide/feature-overview) web component used to select one element of an array or from a data source.
+Is a [Polymer 3](https://polymer-library.polymer-project.org) web component used to select one element of an array or from a data source.
 
-See: [Demo](https://www.webcomponents.org/element/paper-autocomplete/demo/demo/index.html).
+See: [Demo](https://www.webcomponents.org/element/@fluidnext-polymer/paper-autocomplete/demo/demo/index.html).
 
 ## Usage
 ### Installation
@@ -46,10 +46,10 @@ customElements.define('sample-element', SampleElement);
 #### Custome Style, from outside
 Find some test on the various demo file.
 
-**_--paper-autocomplete-main-color_**: Color for autocomplete details (border & icons).  
-**_--paper-input-font-color_**: Font color only for input value.  
-**_--paper-suggestions-color_**: Font color for item suggestions.  
-**_--suggestions-item-min-height_**: Min heigth for item suggestions.  
+**_--paper-autocomplete-main-color_**: Color for autocomplete details (border & icons).
+**_--paper-input-font-color_**: Font color only for input value.
+**_--paper-suggestions-color_**: Font color for item suggestions.
+**_--suggestions-item-min-height_**: Min heigth for item suggestions.
 **_--paper-autocomplete-min-height_**: Min heigth for the autocomplete, that wrap also the suggestions.
 
 #### Contributing
@@ -79,9 +79,3 @@ Open terminal in the project root folder and run the following command.
 polymer test
 ```
 To see tests details, open the generated "index.html" inside "coverage/lcov-report" folder.
-
-##### Difference Usage between VScode and not
-With VScode you see the result and log in the **_DEBUG CONSOLE_**.  
-Without VScode you must use the **_Inspect Element_** of your default Browser.  
-If will you use VScode, **_remember_**, you must config the debbuger in .vscode folder.  
-(my .vscode folder is ignored by gitignore)
