@@ -101,7 +101,6 @@ workflows:
             tags:
               only: /.*/
       - coveralls:
-          context: coveralls
           requires:
             - test
           filters:
