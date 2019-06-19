@@ -52,6 +52,12 @@ jobs:
           name: Testing a component on Browsers
           command: |
             npm run test-chrome
+      
+      # Push Coveralls data in their server
+      - run:
+          name: Push coverage data
+          command: |
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 
   coveralls:
     docker:
@@ -95,14 +101,6 @@ workflows:
   continuous-delivery-workflow:
     jobs:
       - test:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /.*/
-      - coveralls:
-          requires:
-            - test
           filters:
             branches:
               ignore: /.*/
