@@ -53,12 +53,7 @@ jobs:
           command: |
             npm run test-chrome
 
-      # Push Coverage Data
-      - run:
-          name: Push coverage data
-          command: |
-            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-  deploy:
+  coveralls:
     docker:
         # specify the version you desire here
       - image: circleci/node:11.8.0-stretch-browsers
@@ -69,15 +64,31 @@ jobs:
       # Checkout project
       - checkout
 
-      # Create the npmrc to authenticate to npm
       - run:
-          name: Authenticate with registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+          name: Push coverage data
+          command: |
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+  
+  # deploy:
+  #   docker:
+  #       # specify the version you desire here
+  #     - image: circleci/node:11.8.0-stretch-browsers
 
-      # Publish Release on NPM after the test
-      - run:
-          name: Publish release on NPM
-          command: npm publish --loglevel verbose --tag latest --access public
+  #   working_directory: ~/repo
+
+  #   steps:
+  #     # Checkout project
+  #     - checkout
+
+  #     # Create the npmrc to authenticate to npm
+  #     - run:
+  #         name: Authenticate with registry
+  #         command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+  #     # Publish Release on NPM after the test
+  #     - run:
+  #         name: Publish release on NPM
+  #         command: npm publish --loglevel verbose --tag latest --access public
 
 workflows:
   version: 2
@@ -89,8 +100,8 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
-      - deploy:
-          context: deploy
+      - coveralls:
+        context: coveralls
           requires:
             - test
           filters:
@@ -98,3 +109,13 @@ workflows:
               ignore: /.*/
             tags:
               only: /.*/
+      # - deploy:
+      #     context: deploy
+      #     requires:
+      #       - test
+      #       - coveralls
+      #     filters:
+      #       branches:
+      #         ignore: /.*/
+      #       tags:
+      #         only: /.*/
