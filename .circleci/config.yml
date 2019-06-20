@@ -135,12 +135,16 @@ workflows:
     jobs:
       - test:
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /.*/
       - coveralls:
           requires:
             - test
           filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /.*/
       - deploy:
