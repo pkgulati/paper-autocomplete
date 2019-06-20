@@ -135,16 +135,12 @@ workflows:
     jobs:
       - test:
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - coveralls:
           requires:
             - test
           filters:
-            branches:
-              only: master
             tags:
               only: /.*/
       - deploy:
@@ -155,5 +151,3 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
-              only: /.*/

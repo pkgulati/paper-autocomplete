@@ -354,12 +354,18 @@ class PaperAutocomplete extends PolymerElement {
                 value: false
             },
 
+            /**
+             * Set to `true` for auto clear paper-input after the select
+             */
             autoClear: {
                 type: Boolean,
                 value: false,
                 notify: true
             },
 
+            /**
+             * Delay for clear paper-input after the select
+             */
             clearDelay: {
                 type: Number,
                 value: 200,
