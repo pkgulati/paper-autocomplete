@@ -10,6 +10,7 @@
     <script type="module">
         import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
         import '@polymer/iron-demo-helpers/demo-snippet.js';
+        import '@fluidnext-polymer/paper-chip/paper-chips.js';
     </script>
 
     <custom-style>
@@ -29,33 +30,6 @@
         let remoteData = [];
         let xmlhttp = new XMLHttpRequest();
         let url = "json_for_Remote.json"; 
-        let dataTest = [
-                {
-                    numberShirt: 35,
-                    name: 'Kevin',
-                    text: 'Only a example'
-                },
-                {
-                    numberShirt: 30,
-                    name: 'Curry',
-                    text: 'Three points player'
-                },
-                {
-                    numberShirt: 55,
-                    name: 'Curtis',
-                    text: 'Olimpia player'
-                },
-                {
-                    numberShirt: 73,
-                    name: 'Becurto',
-                    text: 'Fake player for test'
-                },
-                {
-                    numberShirt: 23,
-                    name: 'Jordan',
-                    text: 'Best ever player'
-                }
-            ];
 
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -74,14 +48,6 @@
                 return obj.player_name.toLowerCase().indexOf(search) !== -1;
             }));
         }
-
-        // setVariable for the first example
-        setTimeout(function(){
-            document.querySelector('#first').source = dataTest;
-            document.querySelector('#firstDefault').source = dataTest;
-            let secondElement = document.querySelector('#second');
-            secondElement.addEventListener('autocomplete-change', remoteFunction);
-        }, 1000);
     </script>
     <style>
         paper-autocomplete#second{
@@ -92,18 +58,106 @@
     </style> 
     <div class="vertical-section-container centered">
         <h3>Paper Autocomplete, whit suffix</h3>
-            <demo-snippet>
-                <template>
-                    <paper-autocomplete id="first" show-results-on-focus="true" label="Search Something" text-property="name">
-                        <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
-                    </paper-autocomplete>
-                    <br>
-                    <br>
-                    <paper-autocomplete id="firstDefault" show-results-on-focus="true" label="I've a default value" text-property="name" value='{"numberShirt": "73", "name": "Becurto", "text": "Fake player for test"}'>
-                        <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
-                    </paper-autocomplete>
-                </template>
-            </demo-snippet>
+        <demo-snippet>
+            <template>
+                <dom-bind id="firstTest">
+                    <template>
+                        <paper-autocomplete id="first" show-results-on-focus="true" label="Search Something" text-property="name" source="[[players]]">
+                            <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
+                        </paper-autocomplete>
+                        <br>
+                        <br>
+                        <paper-autocomplete id="firstDefault" show-results-on-focus="true" label="I've a default value" text-property="name" source="[[players]]" value='{"numberShirt": "73", "name": "Becurto", "text": "Fake player for test"}'>
+                            <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
+                        </paper-autocomplete>
+                    </template>
+                </dom-bind>
+                <script>
+                    let domBind = document.querySelector('dom-bind#firstTest');
+
+                    domBind.players = [
+                            {
+                                numberShirt: 35,
+                                name: 'Kevin',
+                                text: 'Only a example'
+                            },
+                            {
+                                numberShirt: 30,
+                                name: 'Curry',
+                                text: 'Three points player'
+                            },
+                            {
+                                numberShirt: 55,
+                                name: 'Curtis',
+                                text: 'Olimpia player'
+                            },
+                            {
+                                numberShirt: 73,
+                                name: 'Becurto',
+                                text: 'Fake player for test'
+                            },
+                            {
+                                numberShirt: 23,
+                                name: 'Jordan',
+                                text: 'Best ever player'
+                            }
+                        ];
+                </script>
+            </template>
+        </demo-snippet>
+        <h3>Paper Autocomplete, with chips and auto-clear</h3>
+        <demo-snippet>
+            <template>
+                <dom-bind id="autoClearTest">
+                    <template>
+                        <paper-autocomplete id="clearAutocomplete" label="Search Something" text-property="name" source="[[players]]" auto-clear="true" on-autocomplete-selected="addChip">
+                            <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
+                        </paper-autocomplete>
+                        <br>
+                        <br>
+                        <div class="chipsContainer">
+                            <paper-chips id="stringChips" items="{{selectedPlayers}}"></paper-chips>
+                        </div>
+                    </template>
+                </dom-bind>
+                <script>
+                    let domBindClear = document.querySelector('dom-bind#autoClearTest');
+
+                    domBindClear.players = [
+                        {
+                            numberShirt: 35,
+                            name: 'Kevin',
+                            text: 'Only a example'
+                        },
+                        {
+                            numberShirt: 30,
+                            name: 'Curry',
+                            text: 'Three points player'
+                        },
+                        {
+                            numberShirt: 55,
+                            name: 'Curtis',
+                            text: 'Olimpia player'
+                        },
+                        {
+                            numberShirt: 73,
+                            name: 'Becurto',
+                            text: 'Fake player for test'
+                        },
+                        {
+                            numberShirt: 23,
+                            name: 'Jordan',
+                            text: 'Best ever player'
+                        }
+                    ];
+
+                    domBindClear.addChip = function(evt){
+                        let data = evt.detail.value;
+                        domBindClear.$.stringChips.add(data);
+                    }
+                </script>
+            </template>
+        </demo-snippet>
         <h3>Paper Autocomplete, remote Source</h3>
         <demo-snippet>
             <template>
@@ -111,7 +165,7 @@
                     <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
                 </paper-autocomplete>
             </template>
-        </demo-snippet>
+        </demo-snippet> 
         <h3>Paper Autocomplete, Custom Template</h3>
         <demo-snippet>
             <template>

@@ -1,7 +1,6 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
-// import '@polymer/iron-icons/iron-icons';
 import './icons/paper-input-file-icons';
 import './paper-autocomplete-suggestions';
 
@@ -355,6 +354,18 @@ class PaperAutocomplete extends PolymerElement {
                 value: false
             },
 
+            autoClear: {
+                type: Boolean,
+                value: false,
+                notify: true
+            },
+
+            clearDelay: {
+                type: Number,
+                value: 200,
+                notify: true
+            },
+
             /*************
             * PRIVATE
             *************/
@@ -434,6 +445,9 @@ class PaperAutocomplete extends PolymerElement {
     _onAutocompleteSelected(evt) {
         var selection = evt.detail.value;
         this.value = selection;
+        if (this.autoClear === true) {
+            setTimeout(this._clear.bind(this), this.clearDelay);
+        }
     }
 
     /**

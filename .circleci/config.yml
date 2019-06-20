@@ -52,12 +52,6 @@ jobs:
           name: Testing a component on Browsers
           command: |
             npm run test-chrome
-      
-      # Push Coveralls data in their server
-      - run:
-          name: Push coverage data
-          command: |
-            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
 
   coveralls:
     docker:
@@ -114,26 +108,26 @@ jobs:
           command: |
             cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
   
-  # deploy:
-  #   docker:
-  #       # specify the version you desire here
-  #     - image: circleci/node:11.8.0-stretch-browsers
+  deploy:
+    docker:
+        # specify the version you desire here
+      - image: circleci/node:11.8.0-stretch-browsers
 
-  #   working_directory: ~/repo
+    working_directory: ~/repo
 
-  #   steps:
-  #     # Checkout project
-  #     - checkout
+    steps:
+      # Checkout project
+      - checkout
 
-  #     # Create the npmrc to authenticate to npm
-  #     - run:
-  #         name: Authenticate with registry
-  #         command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      # Create the npmrc to authenticate to npm
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
 
-  #     # Publish Release on NPM after the test
-  #     - run:
-  #         name: Publish release on NPM
-  #         command: npm publish --loglevel verbose --tag latest --access public
+      # Publish Release on NPM after the test
+      - run:
+          name: Publish release on NPM
+          command: npm publish --loglevel verbose --tag latest --access public
 
 workflows:
   version: 2
@@ -153,13 +147,13 @@ workflows:
               only: master
             tags:
               only: /.*/
-      # - deploy:
-      #     context: deploy
-      #     requires:
-      #       - test
-      #       - coveralls
-      #     filters:
-      #       branches:
-      #         only: master
-      #       tags:
-      #         only: /.*/
+      - deploy:
+          context: deploy
+          requires:
+            - test
+            - coveralls
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /.*/
