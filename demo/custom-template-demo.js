@@ -1,6 +1,4 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element.js';
-import '@polymer/paper-item/paper-item.js';
-import '@polymer/paper-ripple/paper-ripple.js';
 import '@polymer/iron-demo-helpers/demo-snippet.js';
 import '../paper-autocomplete.js';
 
