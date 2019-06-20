@@ -1,7 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import '@polymer/paper-input/paper-input';
 import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
+// import '@polymer/iron-icons/iron-icons';
+import './icons/paper-input-file-icons';
 import './paper-autocomplete-suggestions';
 
 class PaperAutocomplete extends PolymerElement {
@@ -105,7 +106,7 @@ class PaperAutocomplete extends PolymerElement {
                     >
 
                         <slot name="prefix" slot="prefix"></slot>
-                        <paper-icon-button slot="suffix" suffix id="clear" icon="icons:clear" on-click="_clear"></paper-icon-button>
+                        <paper-icon-button slot="suffix" suffix id="clear" icon="paper-autocomplete:clear" on-click="_clear"></paper-icon-button>
                         <slot name="suffix" slot="suffix"></slot>
                     </paper-input>
                     <!-- to announce current selection to screen reader -->
