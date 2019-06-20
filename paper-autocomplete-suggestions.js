@@ -3,7 +3,7 @@ import {flush} from '@polymer/polymer/lib/utils/flush';
 import '@polymer/paper-styles/typography';
 import '@polymer/paper-styles/element-styles/paper-material-styles';
 import '@polymer/paper-item/paper-item';
-import '@polymer/paper-ripple/paper-ripple';
+
 //LEGACY
 import { templatize } from '@polymer/polymer/lib/utils/templatize';
 

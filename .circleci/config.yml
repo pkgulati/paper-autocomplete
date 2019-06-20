@@ -68,7 +68,7 @@ jobs:
 
     steps:
       # Checkout project
-      - checkout master
+      - checkout
 
       # TODO controll comment
       # Download and cache dependencies
@@ -142,7 +142,7 @@ workflows:
       - test:
           filters:
             branches:
-              ignore: /.*/
+              only: master
             tags:
               only: /.*/
       - coveralls:
@@ -150,7 +150,7 @@ workflows:
             - test
           filters:
             branches:
-              ignore: /.*/
+              only: master
             tags:
               only: /.*/
       # - deploy:
@@ -160,6 +160,6 @@ workflows:
       #       - coveralls
       #     filters:
       #       branches:
-      #         ignore: /.*/
+      #         only: master
       #       tags:
       #         only: /.*/
