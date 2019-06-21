@@ -77,12 +77,12 @@ jobs:
 
       - run:
           name: Download Selenium
-          command: |
+          command:
             curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
 
       - run:
           name: Start Selenium
-          command: |
+          command:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 
@@ -99,15 +99,17 @@ jobs:
       # TODO integrate other browser
       - run:
           name: Testing a component on Browsers
-          command: |
+          command:
             npm run test-chrome
-      
+
       # Push Coveralls data in their server
       - run:
           name: Push coverage data
           command: |
-            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
-  
+            cat ./coverage/lcov.info
+            ./node_modules/coveralls/bin/coveralls.js
+            rm -rf ./coverage
+
   deploy:
     docker:
         # specify the version you desire here
@@ -117,7 +119,9 @@ jobs:
 
     steps:
       # Checkout project
-      - checkout
+      - run:
+          name: Check out master branch
+          command: git checkout master
 
       # Create the npmrc to authenticate to npm
       - run:
@@ -153,5 +157,7 @@ workflows:
             - test
             - coveralls
           filters:
-            branches:
-              only: master
+             branches:
+               ignore: /.*/
+            tags:
+               only: /.*/

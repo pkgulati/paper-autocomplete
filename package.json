@@ -1,6 +1,6 @@
 {
     "name": "@fluidnext-polymer/paper-autocomplete",
-    "version": "3.0.2",
+    "version": "3git co.1.0",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
@@ -25,7 +25,7 @@
     },
     "license": "BSD-3-Clause",
     "bugs": {
-        "url":  "https://github.com/fluidnext/paper-autocomplete/issues"
+        "url": "https://github.com/fluidnext/paper-autocomplete/issues"
     },
     "homepage": "https://github.com/fluidnext/paper-autocomplete",
     "main": "paper-autocomplete.js",
@@ -54,12 +54,12 @@
     },
     "contributors": [
         {
-          "name": "Simone Spada",
-          "url": "https://github.com/SimoneSpada"
+            "name": "Simone Spada",
+            "url": "https://github.com/SimoneSpada"
         },
         {
-          "name": "Antonio Visalli",
-          "url": "https://github.com/visa4fluid"
+            "name": "Antonio Visalli",
+            "url": "https://github.com/visa4fluid"
         }
-      ]
+    ]
 }
