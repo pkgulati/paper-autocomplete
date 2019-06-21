@@ -157,5 +157,7 @@ workflows:
             - test
             - coveralls
           filters:
-            branches:
-              only: master
+             branches:
+               ignore: /.*/
+            tags:
+               only: /.*/
