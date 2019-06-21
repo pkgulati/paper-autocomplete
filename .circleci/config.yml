@@ -123,9 +123,7 @@ jobs:
 
     steps:
       # Checkout project
-      - run:
-          name: Check out master branch
-          command: git checkout master
+      - checkout
 
       # Create the npmrc to authenticate to npm
       - run:
