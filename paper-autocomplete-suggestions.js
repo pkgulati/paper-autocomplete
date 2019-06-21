@@ -1,7 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer/polymer-element';
 import {flush} from '@polymer/polymer/lib/utils/flush';
-import '@polymer/paper-styles/typography';
-import '@polymer/paper-styles/element-styles/paper-material-styles';
 import '@polymer/paper-item/paper-item';
 
 //LEGACY
@@ -49,18 +47,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                     text-align: center;
                 }
 
-                /**
-                *   
-                    media screen for different resolution --
-                    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-                        paper-item {
-                        height: var(--paper-item-min-height, 36px);
-                        }
-                    }
-                    .paper-font-headline {
-                        @apply --paper-font-headline;
-                    }
-                */
+  
                 .paper-material {
                     display: block;
                     position: relative;
@@ -393,8 +380,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         }
     }
     /**
-     * 
-     * @param {CustomEvent} event 
+     *
+     * @param {CustomEvent} event
      */
     _createSuggestions(event) {
         this._currentIndex = -1;
@@ -463,7 +450,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
        * Listener to changes to _suggestions state
        */
     _onSuggestionsChanged() {
-        
+
         this._input.debounce('_onSuggestionChanged', function () {
             this._renderSuggestions(this._suggestions);
             if (this._suggestions.length > 0) {
@@ -471,7 +458,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             } else {
                 this._hideSuggestionsWrapper();
             }
-            
+
             flush();
             this._resetScroll();
 
