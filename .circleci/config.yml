@@ -62,7 +62,9 @@ jobs:
 
     steps:
       # Checkout project
-      - checkout
+      - run:
+          name: Checkout master
+          command: git checkout master
 
       # TODO controll comment
       # Download and cache dependencies
@@ -106,8 +108,7 @@ jobs:
       - run:
           name: Push coverage data
           command: |
-            cat ./coverage/lcov.info
-            ./node_modules/coveralls/bin/coveralls.js
+            cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
             rm -rf ./coverage
 
   deploy:
