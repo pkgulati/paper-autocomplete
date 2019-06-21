@@ -1,6 +1,6 @@
 {
     "name": "@fluidnext-polymer/paper-autocomplete",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
@@ -41,16 +41,10 @@
         "@fluidnext-polymer/paper-chip": "3.1.1"
     },
     "dependencies": {
-        "@polymer/iron-icon": "^3.0.0",
-        "@polymer/iron-icons": "^3.0.0",
-        "@polymer/iron-pages": "^3.0.1",
-        "@polymer/paper-card": "^3.0.1",
+        "@polymer/polymer": "^3.0.0",
         "@polymer/paper-icon-button": "^3.0.2",
         "@polymer/paper-input": "^3.0.1",
-        "@polymer/paper-item": "^3.0.1",
-        "@polymer/paper-ripple": "^3.0.1",
-        "@polymer/paper-styles": "^3.0.1",
-        "@polymer/polymer": "^3.0.0"
+        "@polymer/paper-item": "^3.0.1"
     },
     "contributors": [
         {
