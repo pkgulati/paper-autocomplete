@@ -62,6 +62,9 @@ jobs:
 
     steps:
       # Checkout project
+      - checkout
+
+      # Checkout project
       - run:
           name: Checkout master
           command: git checkout master
