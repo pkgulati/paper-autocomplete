@@ -27,8 +27,7 @@ class PaperAutocomplete extends PolymerElement {
                         width: 24px;
                        
                     }
-                    
-                     --iron-icon : {
+                    --iron-icon : {
                         height: 18px;
                         width: 18px;
                         margin-bottom: 9px;
