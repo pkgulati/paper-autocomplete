@@ -21,8 +21,6 @@ var_2: &install_and_test
     name: Testing a component on Browsers
     command: |
       npm run test-chrome
-    
-
 
 version: 2
 jobs:
