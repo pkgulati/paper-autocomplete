@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>Paper autocomplete</title>
-    
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
     <script type="module">
         import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
         import '@polymer/iron-demo-helpers/demo-snippet.js';
@@ -20,7 +20,7 @@
             }
         </style>
     </custom-style>
-    
+
     <script type="module" src="custom-template-demo.js"></script>
 </head>
 
@@ -29,7 +29,7 @@
         // Data for the second example
         let remoteData = [];
         let xmlhttp = new XMLHttpRequest();
-        let url = "json_for_Remote.json"; 
+        let url = "json_for_Remote.json";
 
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
@@ -54,8 +54,8 @@
             --paper-autocomplete-main-color: #ff494d;
             --paper-autocomplete-suggestions-color: #9754C8;
             --paper-input-font-color: #2A64D4;
-        }   
-    </style> 
+        }
+    </style>
     <div class="vertical-section-container centered">
         <h3>Paper Autocomplete, whit suffix</h3>
         <demo-snippet>
@@ -165,13 +165,13 @@
                     <paper-icon-button slot="suffix" suffix icon="paper-autocomplete:search"></paper-icon-button>
                 </paper-autocomplete>
             </template>
-        </demo-snippet> 
+        </demo-snippet>
         <h3>Paper Autocomplete, Custom Template</h3>
         <demo-snippet>
             <template>
                 <custom-template id="customAutocomplete"></custom-template>
             </template>
-        </demo-snippet> 
+        </demo-snippet>
     </div>
 </body>
 
