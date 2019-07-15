@@ -4,6 +4,7 @@
     "flat": true,
     "description": "Custom Autocomplete, used to select 1 element of an array, or one item from a data source",
     "scripts": {
+        "analyze": "polymer analyze -i paper-autocomplete.js paper-autocomplete-suggestions.js > analysis.json",
         "test": "polymer test",
         "test-chrome": "polymer test -l chrome",
         "test-safari": "polymer test -l safari",
@@ -30,6 +31,7 @@
     "homepage": "https://github.com/fluidnext/paper-autocomplete",
     "main": "paper-autocomplete.js",
     "devDependencies": {
+        "@polymer/iron-component-page": "^3.0.0-pre.20",
         "@polymer/iron-demo-helpers": "^3.1.0",
         "coveralls": "^3.0.3",
         "polymer-cli": "^1.9.7",

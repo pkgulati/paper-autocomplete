@@ -4,6 +4,9 @@ import '@polymer/paper-icon-button/paper-icon-button';
 import './icons/paper-input-file-icons';
 import './paper-autocomplete-suggestions';
 
+/**
+ * @demo demo/index.html Paper-Autocomplete
+ */
 class PaperAutocomplete extends PolymerElement {
     static get template() {
         return html`
@@ -134,6 +137,7 @@ class PaperAutocomplete extends PolymerElement {
         return {
             /**
              * `autoValidate` Set to true to auto-validate the input value.
+             * @type {Boolean}
              */
             autoValidate: {
                 type: Boolean,
@@ -141,6 +145,7 @@ class PaperAutocomplete extends PolymerElement {
             },
             /**
              * Setter/getter manually invalid input
+             * @type {Boolean}
              */
             invalid: {
                 type: Boolean,
@@ -149,6 +154,7 @@ class PaperAutocomplete extends PolymerElement {
             },
             /**
              * `autocapitalize` Sets auto-capitalization for the input element.
+             * @type {String}
              */
             autocapitalize: {
                 type: String
@@ -156,6 +162,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `errorMessage` The error message to display when the input is invalid.
+             * @type {String}
              */
             errorMessage: {
                 type: String
@@ -163,6 +170,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `label` Text to display as the input label
+             * @type {String}
              */
             label: {
                 type: String
@@ -170,6 +178,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `noLabelFloat` Set to true to disable the floating label.
+             * @type {Boolean}
              */
             noLabelFloat: {
                 type: Boolean,
@@ -178,6 +187,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `alwaysFloatLabel` Set to true to always float label
+             * @type {Boolean}
              */
             alwaysFloatLabel: {
                 type: Boolean,
@@ -186,6 +196,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * The placeholder text
+             * @type {String}
              */
             placeholder: {
                 type: String
@@ -193,6 +204,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `required` Set to true to mark the input as required.
+             * @type {Boolean}
              */
             required: {
                 type: Boolean,
@@ -201,6 +213,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `readonly` Set to true to mark the input as readonly.
+             * @type {Boolean}
              */
             readonly: {
                 type: Boolean,
@@ -209,6 +222,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `focused` If true, the element currently has focus.
+             * @type {Boolean}
              */
             focused: {
                 type: Boolean,
@@ -218,6 +232,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `disabled` Set to true to mark the input as disabled.
+             * @type {Boolean}
              */
             disabled: {
                 type: Boolean,
@@ -226,6 +241,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `source` Array of objects with the options to execute the autocomplete feature
+             * @type {Array}
              */
             source: {
                 type: Array,
@@ -234,6 +250,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Property of local datasource to as the text property
+             * @type {String}
              */
             textProperty: {
                 type: String,
@@ -242,6 +259,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `value` Selected object from the suggestions
+             * @type {Object}
              */
             value: {
                 type: Object,
@@ -252,6 +270,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * The current/selected text of the input
+             * @type {String}
              */
             text: {
                 type: String,
@@ -262,6 +281,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Disable showing the clear X button
+             * @type {Boolean}
              */
             disableShowClear: {
                 type: Boolean,
@@ -270,6 +290,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Binds to a remote data source
+             * @type {Boolean}
              */
             remoteSource: {
                 type: Boolean,
@@ -278,6 +299,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Event type separator
+             * @type {String}
              */
             eventNamespace: {
                 type: String,
@@ -286,6 +308,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Minimum length to trigger suggestions
+             * @type {Number}
              */
             minLength: {
                 type: Number,
@@ -294,6 +317,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `pattern` Pattern to validate input field
+             * @type {String}
              */
             pattern: {
                 type: String
@@ -301,6 +325,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * `allowedPattern` to validate input field
+             * @type {String}
              */
             allowedPattern: {
                 type: String
@@ -308,6 +333,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Set to `true` to show a character counter.
+             * @type {Boolean}
              */
             charCounter: {
                 type: Boolean,
@@ -316,6 +342,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * The maximum length of the input value.
+             * @type {Number}
              */
             maxlength: {
                 type: Number
@@ -323,6 +350,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Name to be used by the autocomplete input. This is necessary if wanted to be integrated with iron-form.
+             * @type {String}
              */
             name: {
                 type: String
@@ -331,6 +359,7 @@ class PaperAutocomplete extends PolymerElement {
             /**
              * Function used to filter available items. This function is actually used by paper-autocomplete-suggestions,
              * it is also exposed here so it is possible to provide a custom queryFn.
+             * @type {Function}
              */
             queryFn: {
                 type: Function
@@ -338,6 +367,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * If `true`, it will always highlight the first result each time new suggestions are presented.
+             * @type {Boolean}
              */
             highlightFirst: {
                 type: Boolean,
@@ -347,6 +377,7 @@ class PaperAutocomplete extends PolymerElement {
             /**
              * Set to `true` to show available suggestions on focus. This overrides the default behavior that only shows
              * notifications after user types
+             * @type {Boolean}
              */
             showResultsOnFocus: {
                 type: Boolean,
@@ -355,6 +386,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Set to `true` for auto clear paper-input after the select
+             * @type {Boolean}
              */
             autoClear: {
                 type: Boolean,
@@ -364,6 +396,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Delay for clear paper-input after the select
+             * @type {Number}
              */
             clearDelay: {
                 type: Number,
@@ -377,6 +410,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Indicates whether the clear button is visible or not
+             * @type {Boolean}
              */
             _isClearButtonVisible: {
                 type: Boolean,
@@ -385,6 +419,7 @@ class PaperAutocomplete extends PolymerElement {
 
             /**
              * Indicates whether the suggestion popup is visible or not.
+             * @type {Boolean}
              */
             _isSuggestionsOpened: {
                 type: Boolean,
@@ -398,6 +433,11 @@ class PaperAutocomplete extends PolymerElement {
         this.addEventListener('autocomplete-selected', this._onAutocompleteSelected);
     }
 
+    /**
+     * 
+     * @param {Object} newSource 
+     * @private
+     */
     _sourceChanged(newSource) {
         var text = this.text;
         if (!Array.isArray(newSource) || newSource.length === 0 || text == null || text.length < this.minLength) {
@@ -415,6 +455,9 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Dispatches autocomplete events
+     * @param {Object} option
+     * @param {Event} evt
+     * @private
      */
     _fireEvent(option, evt) {
         var id = this._getId();
@@ -435,6 +478,8 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * On text event handler
+     * @param {String} text
+     * @private
      */
     _textObserver(text) {
         if (text && text.trim()) {
@@ -446,6 +491,8 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * On autocomplete selection
+     * @param {Event} evt
+     * @private
      */
     _onAutocompleteSelected(evt) {
         var selection = evt.detail.value;
@@ -457,6 +504,8 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * On autocomplete change
+     * @param {Event} evt
+     * @private
      */
     _onAutocompleteChange(evt) {
         var selection = evt.detail;
@@ -465,6 +514,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Show the clear button (X)
+     * @private
      */
     _showClearButton() {
         if (this.disableShowClear) {
@@ -481,6 +531,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Hide the clear button (X)
+     * @private
      */
     _hideClearButton() {
         if (!this._isClearButtonVisible) {
@@ -491,6 +542,10 @@ class PaperAutocomplete extends PolymerElement {
         this._isClearButtonVisible = false;
     }
 
+    /**
+     * Get id element
+     * @private
+     */
     _getId() {
         var id = this.getAttribute('id');
         if (!id) id = this.dataset.id;
@@ -499,6 +554,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Clear value and text
+     * @private
      */
     _clearValue(){
         this.text = '';
@@ -509,14 +565,16 @@ class PaperAutocomplete extends PolymerElement {
     /**
      * Sets the current text/value option of the input
      * @param {Object} option
+     * @private
      */
     _setValue(value){
-            this.text = value[this.textProperty];
-            this._showClearButton();
+        this.text = value[this.textProperty];
+        this._showClearButton();
     }
 
     /**
      * Clear the input text
+     * @private
      */
     _clear(evt) {
         var option = {
@@ -535,6 +593,12 @@ class PaperAutocomplete extends PolymerElement {
         }
     }
     
+    /**
+     * Observer for value attribute
+     * @param {Object} newValue 
+     * @param {Object} oldValue 
+     * @private
+     */
     _changeValue(newValue, oldValue) {
         switch (true){
             case newValue && typeof(newValue) === "object"  && !Array.isArray(newValue) :
@@ -552,6 +616,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Gets the current text/value option of the input
+     * @public
      * @returns {Object}
      */
     getOption() {
@@ -564,6 +629,7 @@ class PaperAutocomplete extends PolymerElement {
     /**
      * Sets the component's current suggestions
      * @param {Array} arr
+     * @public
      */
     suggestions(arr) {
         this.$.paperAutocompleteSuggestions.suggestions(arr);
@@ -571,6 +637,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Validates the input
+     * @public
      * @returns {Boolean}
      */
     validate() {
@@ -579,6 +646,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Clears the current input
+     * @public
      */
     clear() {
         this._clear();
@@ -586,6 +654,7 @@ class PaperAutocomplete extends PolymerElement {
 
     /**
      * Hides the suggestions popup
+     * @public
      */
     hideSuggestions() {
         this._hideClearButton();
@@ -596,6 +665,7 @@ class PaperAutocomplete extends PolymerElement {
      * Allows calling the onSelect function from outside
      * This in time triggers the autocomplete-selected event
      * with all the data required
+     * @public
      */
     onSelectHandler(event) {
         this.$.paperAutocompleteSuggestions._onSelect(event);
