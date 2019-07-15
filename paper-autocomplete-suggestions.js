@@ -81,6 +81,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         return {
             /**
              * `true` if the suggestions list is open, `false otherwise`
+             * @type {Boolean}
              */
             isOpen: {
                 type: Boolean,
@@ -90,6 +91,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Minimum length to trigger suggestions
+             * @type {Number}
              */
             minLength: {
                 type: Number,
@@ -98,6 +100,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Max number of suggestions to be displayed without scrolling
+             * @type {Number}
              */
             maxViewableItems: {
                 type: Number,
@@ -106,6 +109,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Property of local datasource to as the text property
+             * @type {String}
              */
             textProperty: {
                 type: String,
@@ -114,6 +118,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * `source` Array of objects with the options to execute the autocomplete feature
+             * @type {Array}
              */
             source: {
                 type: Array
@@ -121,6 +126,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Binds to a remote data source
+             * @type {Boolean}
              */
             remoteSource: {
                 type: Boolean,
@@ -129,6 +135,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Event type separator
+             * @type {String}
              */
             eventNamespace: {
                 type: String,
@@ -143,6 +150,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
              *    option: // highlighted option data
              * }
              * ```
+             * @type {Object}
              */
             highlightedSuggestion: {
                 type: Object,
@@ -152,6 +160,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * If `true`, it will always highlight the first result each time new suggestions are presented.
+             * @type {Boolean}
              */
             highlightFirst: {
                 type: Boolean,
@@ -161,12 +170,17 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             /**
              * Set to `true` to show available suggestions on focus. This overrides the default behavior that only shows
              * notifications after user types
+             * @type {Boolean}
              */
             showResultsOnFocus: {
                 type: Boolean,
                 value: false
             },
 
+            /**
+             * Default value for key codes
+             * @type {Object}
+             */
             KEY_CODES: {
                 type: Object,
                 value: {
@@ -179,6 +193,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 }
             },
 
+            /**
+             * Default value for direction
+             * @type {Object}
+             */
             DIRECTION: {
                 type: Object,
                 value: {
@@ -189,6 +207,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * `_suggestions` Array with the actual suggestions to display
+             * @type {Array}
              */
             _suggestions: {
                 type: Array,
@@ -198,6 +217,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             /**
              * Indicates the position in the suggestions popup of the currently highlighted element, being `0` the first one,
              * and `this._suggestions.length - 1` the position of the last one.
+             * @type {Number}
              */
             _currentIndex: {
                 type: Number,
@@ -207,6 +227,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             /**
              * Indicates the current position of the scroll. Then the `scrollTop` position is calculated multiplying the
              * `_itemHeight` with the current index.
+             * @type {Number}
              */
             _scrollIndex: {
                 type: Number,
@@ -215,6 +236,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Height of each suggestion element in pixels
+             * @type {Number}
              */
             _itemHeight: {
                 type: Number,
@@ -222,10 +244,18 @@ class PaperAutocompleteSuggestions extends PolymerElement {
                 observer: '_itemHeightChanged'
             },
 
+            /**
+             * Private Value
+             * @type {Object}
+             */
             _value: {
                 value: undefined
             },
-
+            
+            /**
+             * Private Text
+             * @type {String}
+             */
             _text: {
                 value: undefined
             },
@@ -233,6 +263,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             /**
              * This value is used as a base to generate unique individual ids that need to be added to each suggestion for
              * accessibility reasons.
+             * @type {String}
              */
             _idItemSeed: {
                 type: String,
@@ -242,6 +273,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * Reference to binded functions so we can call removeEventListener on element detached
+             * @type {Object}
              */
             _bindedFunctions: {
                 type: Object,
@@ -257,6 +289,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             /**
              * Indicates if the the height of each suggestion item has been already calculated.
              * The assumption is that item height is fixed and it will not change.
+             * @type {Boolean}
              */
             _hasItemHighBeenCalculated: {
                 type: Boolean,
@@ -265,6 +298,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
             /**
              * To avoid unnecessary access to the DOM, we keep a reference to the current template being used
+             * @type {Object}
              */
             __customTplRef: {
                 type: Object
@@ -320,6 +354,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
      * Get the text property from the suggestion
      * @param {Object} suggestion The suggestion item
      * @return {String}
+     * @private
      */
     _getItemText(suggestion) {
         return suggestion[this.textProperty];
@@ -327,6 +362,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Show the suggestions wrapper
+     * @private
      */
     _showSuggestionsWrapper() {
         var suggestionsWrapper = this.$.suggestionsWrapper;
@@ -339,6 +375,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Hide the suggestions wrapper
+     * @private
      */
     _hideSuggestionsWrapper() {
         var suggestionsWrapper = this.$.suggestionsWrapper;
@@ -352,11 +389,20 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._clearSuggestions();
     }
 
+    /**
+     * Trigger the event to create possible suggestions, from locale or remote
+     * @param {Event} event 
+     * @private
+     */
     _handleSuggestions(event) {
         if (!this.remoteSource) this._createSuggestions(event);
         else this._remoteSuggestions();
     }
 
+    /**
+     * Create Suggestions from remote
+     * @private
+     */
     _remoteSuggestions() {
         var value = this._input.value;
         var option = {
@@ -370,6 +416,11 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         }
     }
 
+    /**
+     * Bind suggestions on the component
+     * @param {Array} arr 
+     * @private
+     */
     _bindSuggestions(arr) {
         if (arr.length && arr.length > 0) {
             this._suggestions = arr;
@@ -379,9 +430,12 @@ class PaperAutocompleteSuggestions extends PolymerElement {
             this._suggestions = [];
         }
     }
+
     /**
-     *
+     * Create Suggestions
      * @param {CustomEvent} event
+     * @type {Boolean}
+     * @private
      */
     _createSuggestions(event) {
         this._currentIndex = -1;
@@ -404,6 +458,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         this._suggestions = [];
     }
 
+    /**
+     * Get the Template interface fot the suggestions
+     * @private
+     */
     _getSuggestionTemplate() {
         if (this.__customTplRef) {
             return this.__customTplRef;
@@ -421,7 +479,8 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     /**
      * Render suggestions in the suggestionsWrapper container
      * @param {Array} suggestions An array containing the suggestions to be rendered. This value is not optional, so
-     *    in case no suggestions need to be rendered, you should either not call this method or provide an empty array.
+     * in case no suggestions need to be rendered, you should either not call this method or provide an empty array.
+     * @private
      */
     _renderSuggestions(suggestions) { //ONLY POLYMER 3.X
         var suggestionsContainer = this.$.suggestionsWrapper;
@@ -440,6 +499,10 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         });
     }
 
+    /**
+     * Clear Suggestions List
+     * @private
+     */
     _clearSuggestions() {
         var suggestionsContainer = this.$.suggestionsWrapper,
             last;
@@ -447,8 +510,9 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     }
 
     /**
-       * Listener to changes to _suggestions state
-       */
+     * Listener to changes to _suggestions state
+     * @private
+     */
     _onSuggestionsChanged() {
 
         this._input.debounce('_onSuggestionChanged', function () {
@@ -479,6 +543,11 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         }.bind(this), 200);
     }
 
+    /**
+     * Select the correct suggestion from the list
+     * @param {Number} index 
+     * @private
+     */
     _selection(index) {
         var selectedOption = this._suggestions[index];
 
@@ -495,6 +564,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     /**
      * Get all suggestion elements
      * @return {Array} a list of all suggestion elements
+     * @private
      */
     _getItems() {
         return this.$.suggestionsWrapper.querySelectorAll('paper-item');
@@ -502,11 +572,15 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Empty the list of current suggestions being displayed
+     * @private
      */
     _emptyItems() {
         this._suggestions = [];
     }
 
+    /**
+     * @private
+     */
     _getId() {
         var id = this.getAttribute('id');
         if (!id) id = this.dataset.id;
@@ -515,6 +589,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Remove the active state from all suggestion items
+     * @private
      */
     _removeActive(items) {
         [].slice.call(items).forEach(function (item) {
@@ -525,6 +600,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Key press event handler
+     * @private
      */
     _onKeypress(event) {
         var keyCode = event.which || event.keyCode;
@@ -554,6 +630,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Event handler for the key ENTER press event
+     * @private
      */
     _keyenter() {
         if (this.$.suggestionsWrapper.style.display === 'block' && this._currentIndex > -1) {
@@ -563,8 +640,9 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     }
 
     /**
-     *  Move the current highlighted suggestion up or down
-     *  @param {string} direction Possible values are DIRECTION.UP or DIRECTION.DOWN
+     * Move the current highlighted suggestion up or down
+     * @param {string} direction Possible values are DIRECTION.UP or DIRECTION.DOWN
+     * @private
      */
     _moveHighlighted(direction) {
         var items = this._getItems();
@@ -604,6 +682,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     /**
      * Move scroll (if needed) to display the active element in the suggestions list.
      * @param {string} direction Direction to scroll. Possible values are `DIRECTION.UP` and `DIRECTION.DOWN`.
+     * @private
      */
     _scroll(direction) {
         var newScrollValue, isSelectedOutOfView;
@@ -640,6 +719,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Reset scroll back to zero
+     * @private
      */
     _resetScroll() {
         this.$.suggestionsWrapper.scrollTop = 0;
@@ -649,6 +729,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
      * Set the current highlighted suggestion
      * @param {Object} option Data of the highlighted option
      * @param {string} elementId id of the highlighted dom element.
+     * @private
      */
     _setHighlightedSuggestion(option, elementId) {
         this.highlightedSuggestion = {
@@ -659,6 +740,12 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         };
     }
 
+    /**
+     * Dispatches autocomplete-suggestions events
+     * @param {Object} option
+     * @param {Event} evt
+     * @private
+     */
     _fireEvent(option, evt) {
         var id = this._getId();
         var event = 'autocomplete' + this.eventNamespace + evt;
@@ -674,12 +761,18 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         }));
     }
 
+    /**
+     * Click on the suggestion item
+     * @param {MouseEvent} event
+     * @private
+     */
     _onSelect(event) {
         this._selection(event.currentTarget.getContentChildren()[0].index);
     }
 
     /**
      * Event handler for the onBlur event
+     * @private
      */
     _onBlur() {
         var option = {
@@ -694,6 +787,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Event handler for the onFocus event
+     * @private
      */
     _onFocus(event) {
         var option = {
@@ -720,6 +814,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * When item height is changed, the maxHeight of the suggestionWrapper need to be updated
+     * @private
      */
     _itemHeightChanged() {
         this.$.suggestionsWrapper.style.maxHeight = this._itemHeight * this.maxViewableItems + 'px';
@@ -732,6 +827,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
     /**
      * Sets the component's current suggestions
      * @param {Array} arr
+     * @public
      */
     suggestions(arr) {
         this._bindSuggestions(arr);
@@ -739,6 +835,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
 
     /**
      * Hides the suggestions popup
+     * @public
      */
     hideSuggestions() {
         setTimeout(() => {
@@ -753,6 +850,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
        * @param {Array} datasource An array containing all items before filtering
        * @param {string} query Current value in the input field
        * @returns {Array} an array containing only those items in the data source that matches the filtering logic.
+       * @public
        */
     queryFn(datasource, query) {
         var queryResult = [];
