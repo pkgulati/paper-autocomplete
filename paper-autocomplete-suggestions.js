@@ -408,7 +408,7 @@ class PaperAutocompleteSuggestions extends PolymerElement {
         if (this.__customTplRef) {
             return this.__customTplRef;
         }
-        let element = this.querySelector('slot').assignedNodes()[0];
+       	let element = this.shadowRoot.querySelector('#customTemplate').assignedNodes()[0]; 
         if (element) {
             element.__dataHost = this;
             this.__customTplRef = element;
